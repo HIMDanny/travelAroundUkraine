@@ -11,8 +11,9 @@ const Social =() =>{
     return (
         <div className='contacts__socials-container'>
             {
-                icons.map(icon=>(
-                    <div className='contacts__socials-item'> {icon} </div>))
+                icons.map((icon,i)=>(
+                    // eslint-disable-next-line react/no-array-index-key
+                    <div key={i} className='contacts__socials-item'> {icon} </div>))
             }
         </div>
     )

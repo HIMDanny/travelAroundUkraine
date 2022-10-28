@@ -1,50 +1,79 @@
-import React, {useState ,useRef} from 'react'
-import {Button, FormGroup, TextField} from "@mui/material";
-import  emailjs from "emailjs-com";
+import React, {useState} from 'react'
+import {Button,  TextField} from "@mui/material";
+
 import {ColorRing} from 'react-loader-spinner'
+import {useFormik} from "formik";
+import * as yup from 'yup'
+import * as emailjs from "emailjs-com";
+
+const validationSchema = yup.object({
+    email: yup
+        .string('Enter your email')
+        .email('Enter a valid email')
+        .max(255)
+        .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field ")
+        .required('Email is required'),
+    name: yup
+        .string('Enter your name')
+        .required('Name is required'),
+    message: yup
+        .string('Enter your Message')
+        .required('Message is required'),
+});
+
 
 export default function Form() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+
     const [loading, setLoading] = useState(false)
     const [sent, setSent] =useState(false)
+    const [err, setErr] =useState(false)
+    const [errMessage, setErrMessage] =useState(false)
 
-    const form = useRef();
 
-    const sendEmail = (e) => {
-        e.preventDefault();
-        setLoading(true)
+    const formik = useFormik({
+        initialValues:{
+            name:'',
+            email: '',
+            message:''
+        },
+        validationSchema,
+        onSubmit: (values)=>{
 
-        emailjs.sendForm('service_5lq27v2', 'template_km57vcm', form.current, '5zxjb2IGERE8iKHRY').then((res)=>{
-            // eslint-disable-next-line no-console
-            console.log(res)
-            setMessage('')
-            setName('')
-            setEmail('')
-            setTimeout(() => {
+            setLoading(true)
+
+            emailjs.send('service_5lq27v2', 'template_km57vcm', values, '5zxjb2IGERE8iKHRY')
+                .then(res=>{
+                    console.log(res)
+                    setTimeout(() => {
+                        setLoading(false)
+                        setSent(true)
+                    }, 1000)
+                    setTimeout(() => {
+                        setSent(false)
+                    }, 10000)
+                }).catch ((e)=> {
+                setErr(true)
+                setErrMessage(e.message)
                 setLoading(false)
-                setSent(true)
-            },1000)
-            setTimeout(()=>{
-                setSent(false)
-            },10000)
-        })
+                setTimeout(()=>setErr(false),10000)
+            })
 
-    };
+
+        }
+    })
+
+
+
+
     return(
         <>
-            <FormGroup className='contacts__message-form'>
-                <TextField value={name} onChange={(e)=>setName(e.target.value)} margin='normal' name='name' id="outlined-basic" label="Your Name" variant="outlined" className = "message-input" />
-                <TextField value={email} onChange={(e)=>setEmail(e.target.value)} margin='normal' name='email' id="outlined-basic" label="Email" variant="outlined" className = "message-input" />
-                <TextField value={message} onChange={(e)=>setMessage(e.target.value)} margin='normal' multiline rows={5} name='message' id="outlined-basic" label="Massage" variant="outlined" className = "message-input" />
-                <Button sx={{width: '200px'}} variant = "contained" size = "medium" onClick = {(e)=> sendEmail(e)}>Send A message</Button>
-            </FormGroup>
-            <form style={{display:'none'}} ref={form} action="">
-                <input type="text" value={name} name='name'/>
-                <input type="text" value={email} name='email'/>
-                <input type="text" value={message} name='message'/>
+            <form  className='contacts__message-form' onSubmit={formik.handleSubmit}>
+                <TextField value={formik.values.name} onChange={formik.handleChange} margin='normal' name='name' id="outlined-basic" label="Your Name" variant="outlined" className = "message-input" />
+                <TextField value={formik.values.email} onChange={formik.handleChange} margin='normal' name='email' id="outlined-basic" label="Email" variant="outlined" className = "message-input" />
+                <TextField value={formik.values.message} onChange={formik.handleChange} margin='normal' multiline rows={5} name='message' id="outlined-basic" label="Massage" variant="outlined" className = "message-input" />
+                <Button sx={{width: '200px'}} variant = "contained" size = "medium" type='submit'>Send A message</Button>
             </form>
+
             {loading && (<div className='l'><ColorRing
                 visible
                 height="100"
@@ -56,6 +85,9 @@ export default function Form() {
             /></div>)}
             {sent && (
                 <div className='confirmation'><p>Email sent to Travel Ukraine customer service <br/> we will contact shortly</p> </div>
+            )}
+            {err && (
+                <div className='confirmation'><p>Email is not sent, Failed with error  <br/> {errMessage} </p> </div>
             )}
         </>
     )

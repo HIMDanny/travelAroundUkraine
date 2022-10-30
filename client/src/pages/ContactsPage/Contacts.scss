@@ -15,12 +15,23 @@
   display: grid;
   grid-template-columns: 500px 1fr;
   text-align: left;
+  @media screen and (max-width: 800px){
+    grid-template-columns:70%;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    margin: 0;
+  }
 }
 .contacts__info{
   margin-left: 70px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  @media screen and (max-width: 800px) {
+    margin: 0;
+    align-content: center;
+    justify-content: center;
+  }
   &-header{
 
   }
@@ -48,6 +59,10 @@
 
 .contacts__message{
   padding-right: 80px;
+  @media screen and (max-width : 800px){
+
+    padding: 0;
+  }
   h4{
     margin-bottom: 30px;
   }
@@ -119,5 +134,14 @@
   border: 1px solid rgba(0, 75, 252, 0.04);
   padding: 10px 20px;
   background-color: rgba(77, 77, 134, 0.26);
+}
+.mapContainerStyle{
+  max-width: 1200px;
+  max-height: 400px;
+  margin: 20px;
+ @media screen and (max-width: 900px){
+
+  width: 100%
+  }
 }
 

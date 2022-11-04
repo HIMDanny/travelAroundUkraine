@@ -1,10 +1,10 @@
 import React from 'react'
 import {Box, Link, Grid, Stack, Container, Typography} from "@mui/material"
-import Map from '../../components/Map/Map'
+
 import './Contacts.scss'
 
-import Form from '../../components/Form/Form'
-import Social from '../../components/Socials/Socials'
+import {Form ,Social,Map} from '../../components'
+
 
 
 const ContactsPage = () => (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField,Alert,AlertTitle } from '@mui/material';
 
 import { ColorRing } from 'react-loader-spinner';
 import { useFormik } from 'formik';
@@ -21,7 +21,7 @@ export default function Form() {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [err, setErr] = useState(false);
-  const [errMessage, setErrMessage] = useState(false);
+  const [errMessage, setErrMessage] = useState('');
 
   const formik = useFormik({
     initialValues: {
@@ -88,7 +88,7 @@ export default function Form() {
           variant="outlined"
           className="message-input"
         />
-        <Button sx={{ width: '200px' }} variant="contained" size="medium" type="submit">
+        <Button sx={{ width: '250px' }} variant="contained" size="medium" type="submit">
           Send A message
         </Button>
       </form>
@@ -107,18 +107,16 @@ export default function Form() {
         </div>
       )}
       {sent && (
-        <div className="confirmation">
-          <p>
-            Email sent to Travel Ukraine customer service <br /> we will contact shortly
-          </p>{' '}
-        </div>
+          <Alert severity="info" className="confirmation">
+        <AlertTitle>Sent</AlertTitle>
+        Email sent to Travel Ukraine customer service <br /> we will contact shortly
+        </Alert>
       )}
       {err && (
-        <div className="confirmation">
-          <p>
+          <Alert severity="error" className="confirmation">
+            <AlertTitle>Your message was not sent</AlertTitle>
             Email is not sent, Failed with error <br /> {errMessage}{' '}
-          </p>{' '}
-        </div>
+          </Alert>
       )}
     </>
   );

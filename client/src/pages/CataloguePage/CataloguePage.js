@@ -1,5 +1,5 @@
 import React from 'react';
+import { CatalogMainSection } from '../../components';
 
-const CataloguePage = () => <div>CATALOGUE</div>;
-
+const CataloguePage = () => <CatalogMainSection />;
 export default CataloguePage;

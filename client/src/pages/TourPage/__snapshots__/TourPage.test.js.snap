@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="css-2k8nkm"
+  >
+    <div>
+      <nav
+        class="css-rtewkn"
+      >
+        <div>
+          <a>
+            About us
+          </a>
+          <a>
+            Reasons to choose
+          </a>
+          <a>
+            What is included?
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div
+    class="css-souzgl"
+  >
+    <div>
+      <div>
+        <div
+          sx="[object Object]"
+        >
+          <div
+            class="css-hyfiop"
+            id="about-tour"
+          >
+            <p>
+              About tour
+            </p>
+            <div
+              sx="[object Object]"
+            >
+              <p>
+                Each medieval city is full of various legends and mystical stories. Lviv is no exception because more than 760 years of history simply could not help but leave mysterious legends.
+              </p>
+              <p>
+                The guide will tell and show that Lviv legends can impress no less than Lviv architecture. This tour will be filled with incredible stories - unusual stories from the life of the Galician capital.
+              </p>
+              <p>
+                How can one explain the black colour of one of the houses on Rynok Square? How did Adam Senyavsky marry his daughter? How did the first bulletin board appear in Lviv? Why did one Lviv lady make a not entirely decent offer to the tram? Are the legends about Lviv ghosts true? What do Lviv courtyards hide?
+              </p>
+              <p>
+                All this and more you can learn during this tour.
+              </p>
+              <p>
+                Looks like today. The program of individual excursions: at any hour.
+              </p>
+            </div>
+          </div>
+          <div
+            class="css-hyfiop"
+            id="reasons-to-choose"
+          >
+            <div>
+              <div>
+                <div>
+                  TourReasonToChoose
+                </div>
+                <div>
+                  TourReasonToChoose
+                </div>
+                <div>
+                  TourReasonToChoose
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="css-hyfiop"
+            id="included"
+          >
+            <div>
+              <div>
+                <div>
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-ci5apu-MuiSvgIcon-root"
+                    data-testid="PersonIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                    />
+                  </svg>
+                  <p>
+                    Professional guide
+                  </p>
+                </div>
+                <div>
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-ci5apu-MuiSvgIcon-root"
+                    data-testid="BedIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M21 10.78V8c0-1.65-1.35-3-3-3h-4c-.77 0-1.47.3-2 .78-.53-.48-1.23-.78-2-.78H6C4.35 5 3 6.35 3 8v2.78c-.61.55-1 1.34-1 2.22v6h2v-2h16v2h2v-6c0-.88-.39-1.67-1-2.22zM14 7h4c.55 0 1 .45 1 1v2h-6V8c0-.55.45-1 1-1zM5 8c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v2H5V8z"
+                    />
+                  </svg>
+                  <p>
+                    Accomodation
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-13fe9vk"
+      >
+        <div>
+          <p>
+            €70
+          </p>
+          <button>
+            More info
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        class="css-v912gw"
+      >
+        <div>
+          <div>
+            <p>
+              €70
+            </p>
+            <button>
+              More info
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,6 +1,5 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/react-in-jsx-scope */
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';

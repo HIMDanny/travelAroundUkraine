@@ -7,7 +7,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const AccordionSummary = styled(MuiAccordionSummary)(({ theme }) => ({
   position: 'relative',
   padding: 0,

@@ -2,7 +2,6 @@ import React from 'react';
 import { Paper as MuiPaper, styled, Typography, Box } from '@mui/material';
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Paper = styled((props) => <MuiPaper elevation={0} {...props} />)(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
   maxWidth: '190px',

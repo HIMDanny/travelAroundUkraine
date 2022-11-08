@@ -18,7 +18,7 @@ import PersonIcon from '@mui/icons-material/Person';
 
 import { useInView } from 'react-intersection-observer';
 
-import { TourAccordion, TourInfoDialog, TourReasonToChoose } from '../../components';
+import { TourAccordion, TourInfoDialog, TourReasonToChoose, ImageGallery } from '../../components';
 
 const sections = [
   { title: 'About us', link: '#about-tour' },
@@ -65,7 +65,6 @@ const Nav = styled('nav')(({ theme }) => ({
   },
 }));
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const NavLink = styled((props) => <Link variant="body1" underline="none" {...props} />)(({ theme }) => ({
   color: alpha(theme.palette.text.primary, 0.5),
 
@@ -142,6 +141,9 @@ const TourPage = () => {
 
   return (
     <>
+      <div>
+        <ImageGallery />
+      </div>
       <HeaderContent>
         <Container>
           <Nav>

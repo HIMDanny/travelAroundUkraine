@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Button, Container, Typography, Box, styled } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { ImageCarousel } from '../../components';
+import { AboutUkraine, ImageCarousel, CardContainer } from '../../components';
 
 const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({ theme }) => ({
   fontWeight: 700,
@@ -88,20 +87,28 @@ const HeroContainer = styled(Container)({
 });
 
 const HomePage = () => (
-  <Box sx={{ position: 'relative' }} component="section">
-    <ImageCarousel />
-    <HeroContainer>
-      <TravelText>
-        TRAVEL <span className="heroHeaderHighlighted">around</span>
-      </TravelText>
+  <>
+    <Box sx={{ position: 'relative' }} component="section">
+      <ImageCarousel />
+      <HeroContainer>
+        <TravelText>
+          TRAVEL <span className="heroHeaderHighlighted">around</span>
+        </TravelText>
 
-      <UkraineText>ukraine</UkraineText>
+        <UkraineText>ukraine</UkraineText>
 
-      <Button sx={{ mt: '60px', textTransform: 'uppercase' }} endIcon={<ArrowRightAltIcon />}>
-        to our tours
-      </Button>
-    </HeroContainer>
-  </Box>
+        <Button sx={{ mt: '60px', textTransform: 'uppercase' }} endIcon={<ArrowRightAltIcon />}>
+          to our tours
+        </Button>
+      </HeroContainer>
+    </Box>
+    <Box component="section">
+      <AboutUkraine />
+    </Box>
+    <Box component="section">
+      <CardContainer />
+    </Box>
+  </>
 );
 
 export default HomePage;

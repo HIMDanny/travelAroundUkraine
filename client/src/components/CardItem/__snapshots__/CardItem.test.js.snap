@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Item Snapshot test should CardContainer match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1iryrks"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
+    >
+      $ 200.00
+    </p>
+    <h3
+      class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
+    >
+      Kyiv city walk
+    </h3>
+    <div
+      class="css-h56svl"
+    >
+      <img
+        alt="location"
+        class="MuiBox-root css-dyqcbf"
+        src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
+      />
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
+      >
+        Kyiv region
+      </p>
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
+        data-testid="ArrowForwardIosIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M6.23 20.23 8 22l10-10L8 2 6.23 3.77 14.46 12z"
+        />
+      </svg>
+    </div>
+  </div>
+</DocumentFragment>
+`;

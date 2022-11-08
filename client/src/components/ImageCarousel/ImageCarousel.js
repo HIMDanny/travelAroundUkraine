@@ -1,4 +1,6 @@
+/* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react';
+
 import Carousel from 'react-material-ui-carousel';
 
 const ImageCarousel = () => {

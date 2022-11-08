@@ -30,26 +30,32 @@ const footerGallery = [
   {
     imagePath: './assets/images/footer/CARPATHIANS.jpg',
     altDescription: 'recent_trips_image',
+    id: 1,
   },
   {
     imagePath: './assets/images/footer/CHERNIVTSI.jpg',
     altDescription: 'recent_trips_image',
+    id: 2,
   },
   {
     imagePath: './assets/images/footer/IVANOFRANKIVSK.jpg',
     altDescription: 'recent_trips_image',
+    id: 3,
   },
   {
     imagePath: './assets/images/footer/KYIV.jpg',
     altDescription: 'recent_trips_image',
+    id: 4,
   },
   {
     imagePath: './assets/images/footer/KYIVCENTER.jpg',
     altDescription: 'recent_trips_image',
+    id: 5,
   },
   {
     imagePath: './assets/images/footer/PRYKARPATTIA.png',
     altDescription: 'recent_trips_image',
+    id: 6,
   },
 ];
 const FooterContainer = styled(Box)(({ theme }) => ({
@@ -237,7 +243,7 @@ const Footer = () => (
           </Typography>
           <RecentTrips>
             {footerGallery.map((el) => (
-              <Link to="/catalogue">
+              <Link key={el.id} to="/catalogue">
                 <Box component="img" src={el.imagePath} alt={el.altDescription} />
               </Link>
             ))}

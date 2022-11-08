@@ -1,10 +1,43 @@
-import React, { useState } from 'react';
-import { Button, TextField,Alert,AlertTitle } from '@mui/material';
+import React, {useState} from 'react';
+import {Button, TextField, Alert, AlertTitle, styled} from '@mui/material';
 
-import { ColorRing } from 'react-loader-spinner';
-import { useFormik } from 'formik';
+import {ColorRing} from 'react-loader-spinner';
+import {useFormik} from 'formik';
 import * as yup from 'yup';
 import * as emailjs from 'emailjs-com';
+
+const AlertMessage = styled((props) => <Alert {...props}/>)(({theme}) => ({
+  [theme.breakpoints.up('tablet')]: {
+    width: '30%',
+    maxWidth: '400px',
+    position: 'fixed',
+    bottom: '20px',
+    right: '20px',
+    borderRadius: '20px',
+    border: '1px solid rgba(0, 75, 252, 0.04)',
+    padding: '10px 20px',
+  }
+
+}))
+const LoaderContainer =  styled('div')(() => ({
+  position: 'fixed',
+  top:'50%',
+  left:'50%',
+  transform: 'translate(-50%, -50%)',
+  backgroundColor: 'rgba(40, 44, 52, 0.37)',
+  height: '100vh',
+  width: '100vw',
+  objectFit: 'initial',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex:'5000'
+}))
+
+
+
+
+
 
 const validationSchema = yup.object({
   email: yup
@@ -55,7 +88,7 @@ export default function Form() {
 
   return (
     <>
-      <form className="contacts__message-form" onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <TextField
           value={formik.values.name}
           onChange={formik.handleChange}
@@ -88,13 +121,13 @@ export default function Form() {
           variant="outlined"
           className="message-input"
         />
-        <Button sx={{ width: '250px' }} variant="contained" size="medium" type="submit">
+        <Button sx={{width: '250px'}}  size="medium" type="submit">
           Send A message
         </Button>
       </form>
 
       {loading && (
-        <div className="l">
+        <LoaderContainer>
           <ColorRing
             visible
             height="100"
@@ -104,19 +137,19 @@ export default function Form() {
             wrapperClass="blocks-wrapper"
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
           />
-        </div>
+        </LoaderContainer>
       )}
       {sent && (
-          <Alert severity="info" className="confirmation">
-        <AlertTitle>Sent</AlertTitle>
-        Email sent to Travel Ukraine customer service <br /> we will contact shortly
-        </Alert>
+        <AlertMessage severity="info" >
+          <AlertTitle>Sent</AlertTitle>
+          Email sent to Travel Ukraine customer service <br/> we will contact shortly
+        </AlertMessage>
       )}
       {err && (
-          <Alert severity="error" className="confirmation">
-            <AlertTitle>Your message was not sent</AlertTitle>
-            Email is not sent, Failed with error <br /> {errMessage}{' '}
-          </Alert>
+        <AlertMessage severity='error' >
+          <AlertTitle>Your message was not sent</AlertTitle>
+          Email is not sent, Failed with error <br/> {errMessage}{' '}
+        </AlertMessage>
       )}
     </>
   );

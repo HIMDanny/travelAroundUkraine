@@ -3,87 +3,10 @@ a{
   text-decoration: none !important;
 }
 
-.message-input{
-  background-color: rgba(0, 75, 252, 0.04);
-}
 
 
-.contacts__message{
-  @media screen and (max-width : 800px){
-    padding: 0;
-  }
-  h4{
-    margin-bottom: 30px;
-  }
-  &-form{
-    padding-top: 15px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    button{
-      margin-top: 20px;
-    }
-  }
-}
 
-.contacts__socials{
-  position: relative;
-  &::before{
-    content: '';
-    position: absolute;
-    top: -60px;
-    width: 90%;
-    height: 1px;
-    background-color: #282c34;
-  }
-  &-container{
-    display: flex;
-    flex-wrap: wrap;
-  }
-  &-item{
-    background-color: rgba(40, 44, 52, 0.2);
-    margin: 5px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    &:hover{
-      background-color:rgba(0, 75, 252, 0.04);
-    }
-  }
-  h4{
-    margin-bottom: 30px;
-  }
 
-}
-.l{
-  position: fixed;
-  top:50%;
-  left:50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(40, 44, 52, 0.37);
-  height: 100vh;
-  width: 100vw;
-  object-fit: initial;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.confirmation{
-  width: 30%;
-  max-width: 400px;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  border-radius: 20px;
-  border: 1px solid rgba(0, 75, 252, 0.04);
-  padding: 10px 20px;
-  background-color: rgba(77, 77, 134, 0.26);
-}
 .mapContainerStyle{
   max-width: 1200px;
   max-height: 400px;

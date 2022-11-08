@@ -5,17 +5,42 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import TelegramIcon from '@mui/icons-material/Telegram';
+import {Box, styled} from '@mui/material'
+
+const SocialsContainer = styled((props) => <Box{...props}/>)(() => ({
+  display: 'flex',
+  flexDirection: 'row'
+}))
+
+const SocialItem = styled('div')(()=>({
+  backgroundColor : 'rgba(40, 44, 52, 0.2)',
+  margin: '5px',
+  width: '40px',
+  height : '40px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '10px',
+  cursor : 'pointer',
+  transition: 'all 0.3s ease',
+  '&:hover':{
+    backgroundColor : 'rgba(0, 75, 252, 0.04)'
+  }
+}))
+
+
 
 const Social = () => {
   const icons = [<FacebookIcon/>, <TwitterIcon/>, <LinkedInIcon/>, <YouTubeIcon/>, <PinterestIcon/>, <TelegramIcon/>]
   return (
-    <div className='contacts__socials-container'>
+    <SocialsContainer>
       {
-        icons.map((icon, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <div key={i} className='contacts__socials-item'> {icon} </div>))
+        icons.map((icon,i) => {
+          const key = icon + i;
+         return<SocialItem key={key}> {icon} </SocialItem>
+        })
       }
-    </div>
+    </SocialsContainer>
   )
 }
 export default Social

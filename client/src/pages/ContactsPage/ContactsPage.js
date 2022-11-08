@@ -1,39 +1,81 @@
 import React from 'react'
-import {Box, Link, Grid, Stack, Container, Typography} from "@mui/material"
+import {Box, Link, Grid, Stack, Container, Typography, styled} from "@mui/material"
 
 import './Contacts.scss'
 
-import {Form, Social, Map} from '../../components'
+import {Form, Social, Map} from '../../components';
+
+const InfoContainer = styled((props) => <Grid {...props}/>)(({theme}) => ({
+  [theme.breakpoints.up('laptop')]: {
+    padding: '10px',
+  },
+  [theme.breakpoints.up('xs')]: {
+    direction: 'column',
+    gap: '80px',
+    justifyContent: 'center',
+    marginTop: '70px',
+  },
+
+}))
+
+
+const GetInTouch = styled((props) => <Stack {...props}/>)(({theme}) => ({
+  [theme.breakpoints.up('tablet')]: {
+    padding: '0'
+  },
+  h2: {
+    marginBottom: "30px"
+  },
+  form: {
+    paddingTop: '15px',
+    display: 'flex',
+    flexDirection: 'column',
+    wrap: 'wrap',
+    button: {
+      marginTop: '20px',
+    }
+  },
+  [theme.breakpoints.down('tablet')]: {
+    padding: '0 30px'
+  }
+}))
+
+const SocialsBox = styled((props) => <Box{...props}/>)(() => ({
+ '&:before' : {
+    content: `''`,
+    position: 'absolute',
+    top: '-60px',
+    width: '90%',
+    height: '1px',
+    backgroundColor: 'black',
+   h4:{
+      marginBottom: '30px',
+   }
+  }
+}))
 
 
 const ContactsPage = () => (
   <Stack direction='column' maxWidth='1200px' justifyContent='center' m=' 50px auto 100px auto' id="contacts">
-    <Container className='contacts-header'><Typography textAlign='center' variant="h4">Contact
-      Us</Typography></Container>
+    <Container><Typography textAlign='center' variant="h2">Contact Us</Typography></Container>
     <Map/>
-    <Grid container gap='80px' justifyContent='center' mt='70px' className='contacts__container'
-          sx={{
-            direction: {
-              lg: 'row', sx: 'column',
-            },
-          }}>
-      <Grid item xs={5} minWidth='440px'>
-        <Stack direction='column' spacing={10} ml='50px' className="contacts__info">
+    <InfoContainer container>
+      <Grid item xs={5} minWidth='400px'>
+        <GetInTouch spacing={10}>
           <Box>
-            <Typography variant="h4">
+            <Typography variant="h2">
               Contact Info
             </Typography>
-            <Grid container direction='row' wrap='nowrap' pt='30px' className="contacts__credentials">
-              <Grid container item width='70px' spacing={3} xs={2} direction='column'
-                    className="contacts__credentials-names">
+            <Grid container direction='row' wrap='nowrap' pt='30px' minWidth='400px' alignItems='center'>
+              <Grid container item width='70px' spacing={3} xs={2} direction='column'>
                 <Grid item>
-                  <Typography color='black' fontWeight='bold'>Address:</Typography>
+                  <Typography fontWeight='bold'>Address:</Typography>
                 </Grid>
                 <Grid item>
-                  <Typography color='black' fontWeight='bold'>Phone:</Typography>
+                  <Typography fontWeight='bold'>Phone:</Typography>
                 </Grid>
                 <Grid item>
-                  <Typography color='black' fontWeight='bold'>Email:</Typography>
+                  <Typography fontWeight='bold'>Email:</Typography>
                 </Grid>
               </Grid>
               <Grid container item xs={9} spacing={3} direction='column'
@@ -56,15 +98,15 @@ const ContactsPage = () => (
 
             </Grid>
           </Box>
-          <Box className="contacts__socials">
-            <Typography variant="h4">Get Social</Typography>
+          <SocialsBox position='relative'>
+            <Typography variant="h2">Get Social</Typography>
             <Social/>
-          </Box>
-        </Stack>
+          </SocialsBox>
+        </GetInTouch>
       </Grid>
-      <Grid item xs={6} minWidth='440px'>
-        <Stack className="contacts__message">
-          <Typography variant="h4">
+      <Grid item xs={9} tablet={5} minWidth='400px'>
+        <GetInTouch>
+          <Typography variant="h2">
             Get In Touch with Us
           </Typography>
           <Typography variant="p">
@@ -73,10 +115,10 @@ const ContactsPage = () => (
             elit. Magni, voluptatum.
           </Typography>
           <Form/>
-        </Stack>
+        </GetInTouch>
       </Grid>
 
-    </Grid>
+    </InfoContainer>
   </Stack>
 
 

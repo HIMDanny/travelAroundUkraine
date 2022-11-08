@@ -14,6 +14,9 @@ jest.mock('../../components/TourAccordion/TourAccordion.js', () => ({ children }
 jest.mock('../../components/TourInfoDialog/TourInfoDialog.js', () => () => <div>TourInfoDialog</div>);
 jest.mock('../../components/TourReasonToChoose/TourReasonToChoose.js', () => () => <div>TourReasonToChoose</div>);
 
+let mockedMatchesMediaQuery = true;
+jest.mock('@mui/material/useMediaQuery', () => jest.fn(() => mockedMatchesMediaQuery));
+
 describe('Tour Page snapshot testing', () => {
   test('should Tour Page match snapshot', () => {
     const { asFragment } = render(<TourPage />);

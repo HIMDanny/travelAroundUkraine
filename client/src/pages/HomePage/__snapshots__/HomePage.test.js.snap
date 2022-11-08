@@ -23,5 +23,15 @@ exports[`Home page Snapshot test should HomePage match snapshot 1`] = `
       </button>
     </div>
   </section>
+  <section>
+    <div>
+      ABOUT UKRAINE
+    </div>
+  </section>
+  <section>
+    <div>
+      CARD CONTAINER
+    </div>
+  </section>
 </DocumentFragment>
 `;

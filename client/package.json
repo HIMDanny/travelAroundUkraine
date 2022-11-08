@@ -34,7 +34,7 @@
     "prepare": "cd .. && husky install client/.husky",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll=false --passWithNoTests",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "fix": "npx eslint ./src/**/*.js --fix && npx stylelint ./src/**/*.scss --fix"
   },

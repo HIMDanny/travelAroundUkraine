@@ -2,17 +2,11 @@
 
 exports[`CatalogMainSection snapshot testing should CatalogMainSection match snapshot 1`] = `
 <DocumentFragment>
-  <div
-    class="MuiBox-root css-wciv72"
-  >
-    <div
-      class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
-    >
-      <h1
-        class="MuiTypography-root MuiTypography-h1 css-prbj30-MuiTypography-root"
-      >
+  <div>
+    <div>
+      <p>
         our tours
-      </h1>
+      </p>
     </div>
   </div>
 </DocumentFragment>

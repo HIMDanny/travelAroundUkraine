@@ -8,6 +8,8 @@ jest.mock('@mui/material/Container', () => ({ children }) => <div>{children}</di
 jest.mock('@mui/material/Typography', () => ({ children }) => <h1>{children}</h1>);
 jest.mock('@mui/material/Button', () => () => <button>MUI COMPONENT</button>);
 jest.mock('../../components/ImageCarousel/ImageCarousel', () => () => <div>IMAGE CAROUSEL</div>);
+jest.mock('../../components/AboutUkraine/AboutUkraine', () => () => <div>ABOUT UKRAINE</div>);
+jest.mock('../../components/CardContainer/CardContainer', () => () => <div>CARD CONTAINER</div>);
 
 describe('Home page Snapshot test', () => {
   test('should HomePage match snapshot', () => {

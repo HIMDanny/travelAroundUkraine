@@ -2,40 +2,22 @@
 
 exports[`CatalogTourCard snapshot test should CatalogTourCard match snapshot 1`] = `
 <DocumentFragment>
-  <div
-    class="css-y1vxev-MuiStack-root"
-  >
-    <img
-      alt="tour photo"
-      class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-1devhmy-MuiCardMedia-root"
-      src="https://visitukraine.today/media/tours/gallery/ALeR7GgYjAqCqfJnQX5ZYKnBcsDZ6MTJs77IIBKi.jpg"
-    />
-    <div
-      class="MuiCardContent-root css-st23uu-MuiCardContent-root"
-    >
-      <h3
-        class="MuiTypography-root MuiTypography-h3 css-18mzhiy-MuiTypography-root"
-      >
+  <div>
+    <div />
+    <div>
+      <p>
         Sightseeing tour of Chernivtsi
-      </h3>
-      <div
-        class="css-xwivh2-MuiStack-root"
-      >
-        <div
-          class="css-1q36rmd-MuiStack-root"
-        >
+      </p>
+      <div>
+        <div>
           <svg>
             CoinsIcon.svg
           </svg>
-          <span
-            class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
-          >
+          <p>
             69 €
-          </span>
+          </p>
         </div>
-        <div
-          class="css-1q36rmd-MuiStack-root"
-        >
+        <div>
           <svg
             aria-hidden="true"
             class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1fb58gc-MuiSvgIcon-root"
@@ -50,31 +32,18 @@ exports[`CatalogTourCard snapshot test should CatalogTourCard match snapshot 1`]
               d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
             />
           </svg>
-          <span
-            class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
-          >
+          <p>
             3 hours
-          </span>
+          </p>
         </div>
       </div>
-      <p
-        class="MuiTypography-root MuiTypography-body1 css-1gt9t3p-MuiTypography-root"
-      >
+      <p>
         Chernivtsi is often called the Ukrainian Paris, and for good reason - the pearl of Ukrainian Bukovina is in no way inferior to exquisite European capitals and offers tourists entertainment for every taste. We suggest starting with the classics and visiting the top must-see places that will make you fall in love with this city.
       </p>
-      <div
-        class="MuiCardActions-root MuiCardActions-spacing css-1t6e9jv-MuiCardActions-root"
-      >
-        <a
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-11kkwnf-MuiButtonBase-root-MuiButton-root"
-          href="#"
-          tabindex="0"
-        >
+      <div>
+        <button>
           More details
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </a>
+        </button>
       </div>
     </div>
   </div>

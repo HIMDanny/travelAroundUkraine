@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 jest.mock('@mui/material/AppBar', () => ({ children }) => <header>{children}</header>);
 jest.mock('@mui/material/Container', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/Toolbar', () => ({ children }) => <div>{children}</div>);
+jest.mock('@mui/material/Slide', () => ({ children }) => <div>{children}</div>);
 jest.mock('../../components/BurgerMenu/BurgerMenu.js', () => () => <div>BurgerMenu</div>);
 jest.mock('../../components/TabletMenu/TabletMenu.js', () => () => <div>TabletMenu</div>);
 jest.mock('../../components/LogoHeader/LogoHeader.js', () => () => <div>LogoHeader</div>);

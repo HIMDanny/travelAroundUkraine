@@ -13,11 +13,12 @@ const Search = styled('div')(({ theme }) => ({
     backgroundColor: alpha(theme.palette.common.white, 0.25),
     transition: '0.2s',
   },
-  marginLeft: 0,
-  width: '100%',
+  width: 'auto',
+  marginLeft: '9vw',
+
   [theme.breakpoints.up('mobile')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
+    display: 'block',
+    marginLeft: '5vw',
   },
 }));
 

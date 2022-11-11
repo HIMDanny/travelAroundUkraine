@@ -1,7 +1,18 @@
+/* eslint-disable  react/prop-types */
+
 import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Container } from '@mui/material';
+import { AppBar, Toolbar, Container, useScrollTrigger, Slide } from '@mui/material';
 import { BurgerMenu, TabletMenu, LogoHeader, HeaderSearchField } from '../../components';
-import appliedTheme from '../../theme/theme';
+
+const HideOnScroll = ({ children }) => {
+  const trigger = useScrollTrigger();
+  // TODO: fix test warn;
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+};
 
 const Header = () => {
   const [scrollY, setScrollY] = useState();
@@ -14,24 +25,26 @@ const Header = () => {
   }, []);
 
   const appBarSX = {
-    background: scrollY > 400 ? appliedTheme.palette.primary.main : 'none',
+    background: 'primary.main',
     boxShadow: scrollY > 400 ? null : 'none',
     py: { xs: 1, tablet: 1.5, laptop: 2 },
     opacity: 0.95,
-    transition: '0.3s',
+    transition: '0.3s !important',
   };
 
   return (
-    <AppBar sx={appBarSX}>
-      <Container>
-        <Toolbar disableGutters>
-          <LogoHeader />
-          <HeaderSearchField />
-          <BurgerMenu />
-          <TabletMenu />
-        </Toolbar>
-      </Container>
-    </AppBar>
+    <HideOnScroll>
+      <AppBar sx={appBarSX}>
+        <Container>
+          <Toolbar disableGutters>
+            <LogoHeader />
+            <HeaderSearchField />
+            <BurgerMenu />
+            <TabletMenu />
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </HideOnScroll>
   );
 };
 

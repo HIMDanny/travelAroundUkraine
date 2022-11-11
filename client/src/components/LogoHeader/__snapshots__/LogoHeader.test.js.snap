@@ -10,7 +10,7 @@ exports[`Render LogoHeader should LogoHeader render 1`] = `
   >
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-jcctx-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-ulfa0v-MuiSvgIcon-root"
       data-testid="TravelExploreOutlinedIcon"
       focusable="false"
       viewBox="0 0 24 24"

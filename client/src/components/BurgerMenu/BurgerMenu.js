@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Box, MenuItem, Menu, IconButton } from '@mui/material';
+import { Box, MenuItem, Menu, IconButton, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
-import appliedTheme from '../../theme/theme';
 
 const pages = [
   {
@@ -25,7 +24,7 @@ const pages = [
 const styleNavLink = {
   display: 'block',
   textDecoration: 'none',
-  color: appliedTheme.palette.text.primary,
+  color: 'text.primary',
   width: '100%',
   padding: '6px 16px',
 };
@@ -76,7 +75,7 @@ const BurgerMenu = () => {
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={handleOpenNavMenu}
-        sx={{ padding: 0, color: appliedTheme.palette.text.primary }}
+        sx={{ padding: 0, color: 'text.primary' }}
       >
         <MenuIcon />
       </IconButton>
@@ -93,9 +92,9 @@ const BurgerMenu = () => {
       >
         {pages.map(({ name, link, innerContent }) => (
           <MenuItem key={name} onClick={handleCloseNavMenu} sx={menuItemSX}>
-            <NavLink to={link} key={name} onClick={handleCloseNavMenu} style={styleNavLink}>
+            <Typography component={NavLink} to={link} key={name} sx={styleNavLink} end>
               {innerContent}
-            </NavLink>
+            </Typography>
           </MenuItem>
         ))}
       </Menu>

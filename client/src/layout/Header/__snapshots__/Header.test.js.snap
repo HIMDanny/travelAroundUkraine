@@ -2,23 +2,25 @@
 
 exports[`Render Header should Header render 1`] = `
 <DocumentFragment>
-  <header>
-    <div>
+  <div>
+    <header>
       <div>
         <div>
-          LogoHeader
-        </div>
-        <div>
-          HeaderSearchField
-        </div>
-        <div>
-          BurgerMenu
-        </div>
-        <div>
-          TabletMenu
+          <div>
+            LogoHeader
+          </div>
+          <div>
+            HeaderSearchField
+          </div>
+          <div>
+            BurgerMenu
+          </div>
+          <div>
+            TabletMenu
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
+  </div>
 </DocumentFragment>
 `;

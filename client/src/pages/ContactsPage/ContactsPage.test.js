@@ -5,5 +5,5 @@ describe('ContactsPage',()=>{
   test('Contacts page renders',()=>{
     const {asFragment}= render(<ContactsPage/>)
     expect(asFragment()).toMatchSnapshot()
-  })
+  });
 })

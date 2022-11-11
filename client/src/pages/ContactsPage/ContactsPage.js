@@ -56,7 +56,7 @@ const SocialsBox = styled((props) => <Box{...props}/>)(() => ({
 
 
 const ContactsPage = () => (
-  <Stack direction='column' maxWidth='1200px' justifyContent='center' m=' 50px auto 100px auto' id="contacts">
+  <Stack direction='column' maxWidth='1200px' justifyContent='center' m=' 100px auto 100px auto' id="contacts">
     <Container><Typography textAlign='center' variant="h2">Contact Us</Typography></Container>
     <Map/>
     <InfoContainer container>

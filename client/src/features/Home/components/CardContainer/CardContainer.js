@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { Typography, styled, Container } from '@mui/material';
 import { CardItem } from '..';
-import SliderButton from '../../../../components';
+import { SliderButton } from '../../../../components';
 
 import 'swiper/swiper.min.css';
 
@@ -80,7 +80,6 @@ const CardContainerSwiperContainer = styled('div')({
   },
 });
 
-
 const CardContainer = () => (
   <Container>
     <CardContainerHeaderContainer>
@@ -92,8 +91,8 @@ const CardContainer = () => (
       </Link>
     </CardContainerHeaderContainer>
     <CardContainerSwiperContainer>
-      <SliderButton id="previous" position={{top: '44%', left: '-30px', rotate: '180deg'}}/>
-      <SliderButton id="next" position={{top: '44%', right: '-30px'}}/>
+      <SliderButton id="previous" position={{ top: '44%', left: '-30px', rotate: '180deg' }} />
+      <SliderButton id="next" position={{ top: '44%', right: '-30px' }} />
       <Swiper
         breakpoints={{
           265: {

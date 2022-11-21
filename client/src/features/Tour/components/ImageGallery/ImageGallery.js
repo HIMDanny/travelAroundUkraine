@@ -8,7 +8,7 @@ import './Swiper.scss';
 
 import { Autoplay, FreeMode, Mousewheel, Scrollbar, Zoom, Thumbs, Navigation } from 'swiper';
 
-import SliderButton from '../../../../components';
+import { SliderButton } from '../../../../components';
 
 export default function ImageGallery() {
   const [currentImage, setCurrentImage] = useState(0);

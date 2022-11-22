@@ -1,6 +1,8 @@
 import React from 'react';
-import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent } from '@mui/material';
+import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent, Box } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+// import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
@@ -41,6 +43,12 @@ const CardButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+const TitleWrapper = styled(Box)(() => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+}));
+
 const CatalogTourCard = () => (
   <CardContainer direction={{ xs: 'column', tablet: 'row' }} spacing={1}>
     <CardImage
@@ -49,8 +57,10 @@ const CatalogTourCard = () => (
       alt="tour photo"
     />
     <CardContent sx={{ padding: '0 30px 0 36px' }}>
-      <CardTitle>Sightseeing tour of Chernivtsi</CardTitle>
-
+      <TitleWrapper>
+        <CardTitle>Sightseeing tour of Chernivtsi</CardTitle>
+        <FavoriteBorderOutlinedIcon />
+      </TitleWrapper>
       <Stack direction="row" spacing={3} alignItems="start" sx={{ mb: '20px' }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <CoinsIcon />
@@ -58,7 +68,6 @@ const CatalogTourCard = () => (
             69 €
           </Typography>
         </Stack>
-
         <Stack direction="row" spacing={1} alignItems="center">
           <AccessTimeIcon color="primary" sx={{ height: '21px' }} />
           <Typography variant="h3" component="span">
@@ -72,7 +81,6 @@ const CatalogTourCard = () => (
         way inferior to exquisite European capitals and offers tourists entertainment for every taste. We suggest
         starting with the classics and visiting the top must-see places that will make you fall in love with this city.
       </TourDescription>
-
       <CardActions>
         <CardButton href="#">More details</CardButton>
       </CardActions>

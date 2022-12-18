@@ -50,10 +50,10 @@ app.use(bodyParser.json());
 const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
-// mongoose
-//   .connect(db, { useNewUrlParser: true, useFindAndModify: false })
-//   .then(() => console.log('MongoDB Connected'))
-//   .catch((err) => console.log(err));
+mongoose
+  .connect(db, { useNewUrlParser: true, useFindAndModify: false })
+  .then(() => console.log('MongoDB Connected'))
+  .catch((err) => console.log(err));
 
 // const connectDB = async () => {
 //   try {
@@ -112,19 +112,19 @@ const port = process.env.PORT || 5000;
 //   app.listen(port, () => console.log(`Server running on port ${port}`));
 // });
 
-// app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => console.log(`Server running on port ${port}`));
 
-mongoose
-  .connect(db, {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('MongoDB Connected'))
-  .then(() => {
-    app.listen(port, () => console.log(`Server running on port ${port}`));
-  })
-  .catch((err) => {
-    console.log(err);
-    process.exit(1);
-  });
+// mongoose
+//   .connect(db, {
+//     useNewUrlParser: true,
+//     useFindAndModify: false,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log('MongoDB Connected'))
+//   .then(() => {
+//     app.listen(port, () => console.log(`Server running on port ${port}`));
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//     process.exit(1);
+//   });

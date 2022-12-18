@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
+const cors = require('cors');
 require('dotenv').config();
 
 const globalConfigs = require('./routes/globalConfigs');
@@ -28,6 +29,8 @@ const { nextTick } = require('process');
 
 const app = express();
 
+app.use(cors());
+
 // Body parser middleware
 
 app.use((reg, res, next) => {
@@ -35,7 +38,7 @@ app.use((reg, res, next) => {
   res.setHeader(
     'Access-Control-Allow-Methods',
 
-    'OPTIONS, GET, POST, PUT, PATCH, DELETE' // what matters here is that OPTIONs is present
+    'OPTIONS, GET, POST, PUT, PATCH, DELETE', // what matters here is that OPTIONs is present
   );
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();

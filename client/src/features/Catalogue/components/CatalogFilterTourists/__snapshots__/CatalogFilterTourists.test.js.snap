@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CatalogFilterTourists snapshot test should CatalogFilterTourists match snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+      <div>
+        <button>
+          test button
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

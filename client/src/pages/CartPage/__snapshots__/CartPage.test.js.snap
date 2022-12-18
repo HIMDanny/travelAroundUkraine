@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CartPage snapshot test should CartPage match snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      <p>
+        Cart
+      </p>
+      <div>
+        <div>
+          <li>
+            <div>
+              Cart item
+            </div>
+          </li>
+          <li>
+            <div>
+              Cart item
+            </div>
+          </li>
+          <li>
+            <div>
+              Cart item
+            </div>
+          </li>
+        </div>
+        <div>
+          <div>
+            Total info dialog
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

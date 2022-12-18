@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TotalInfoDialog snapshot test should TotalInfoDialog match snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      <p>
+        Total
+      </p>
+      <div>
+        <p>
+          Tours amount:
+        </p>
+        <p>
+          3
+        </p>
+      </div>
+    </div>
+    <div>
+      <div>
+        <p>
+          To be paid:
+        </p>
+        <p>
+          2000 ₴
+        </p>
+      </div>
+    </div>
+    <div>
+      <div>
+        <button
+          type="button"
+        >
+          Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

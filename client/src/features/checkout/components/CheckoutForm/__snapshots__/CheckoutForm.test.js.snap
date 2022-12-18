@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckoutForm snapshot test should CheckoutForm match snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <ul>
+      <li>
+        User Details
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Shipping Address
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Payment Details
+      </li>
+    </ul>
+  </div>
+  <form
+    action="#"
+  >
+    <div>
+      USER DETAILS FORM
+    </div>
+    <button>
+      Continue
+    </button>
+  </form>
+  <div>
+    PAYMENT SUCCESS
+  </div>
+</DocumentFragment>
+`;

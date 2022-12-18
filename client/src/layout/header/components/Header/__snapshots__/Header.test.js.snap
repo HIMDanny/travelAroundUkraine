@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Header should Header render 1`] = `
+<DocumentFragment>
+  <div>
+    <header>
+      <div>
+        <div>
+          <div>
+            LogoHeader
+          </div>
+          <div>
+            HeaderSearchField
+          </div>
+          <div>
+            BurgerMenu
+          </div>
+          <div>
+            TabletMenu
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</DocumentFragment>
+`;

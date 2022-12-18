@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axiosConfig from '../../../axiosConfig';
 
 const catalogueSlice = createSlice({
   name: 'products',
@@ -25,7 +25,7 @@ export const { setProducts, setIsLoading } = catalogueSlice.actions;
 
 export const getProducts = () => async (dispatch) => {
   try {
-    const { data, status } = await axios('/products');
+    const { data, status } = await axiosConfig.get('/products');
 
     if (status) {
       dispatch(setProducts(data));

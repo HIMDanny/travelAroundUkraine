@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import {
+  ContactUsPage,
   HomePage,
   CartPage,
   ErrorPage,
@@ -29,6 +30,7 @@ const AppRoutes = () => (
       <Route path="/user" element={<UserPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/favorites" element={<FavoritesPage />} />
+      <Route path="/contacts" element= {<ContactUsPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   </Routes>

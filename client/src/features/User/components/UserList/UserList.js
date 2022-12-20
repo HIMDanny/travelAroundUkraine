@@ -28,7 +28,7 @@ const listItemInnerTextSX = { my: '2px', fontSize: '18px', mx: { tablet: '20px' 
 const UserList = ({ userData: { firstName, email, telephone, gender } }) => (
   <Paper component="ul" sx={ListSX}>
     <Typography sx={{ m: '15px auto', fontSize: '24px' }} component="h3">
-      {`${firstName}'s info`}
+      {firstName}&apos;s info
     </Typography>
     <Box sx={listItemSX} component="li">
       <Typography sx={listItemTitleSX}>Email: </Typography>

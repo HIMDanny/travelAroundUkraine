@@ -76,7 +76,7 @@ const UserPage = () => {
           <Typography sx={{ color: 'red', py: 3 }} variant="h3">
             {error.statusText}
           </Typography>
-          <Typography>Please try again later</Typography>
+          <Typography>Please move to LogIn page</Typography>
         </Container>
       )}
     </Container>

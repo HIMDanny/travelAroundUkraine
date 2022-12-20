@@ -38,12 +38,16 @@ const userSlice = createSlice({
   initialState,
 
   reducers: {
-    toggleIsLogin: (state) => {
-      state.isLogin = !state.isLogin;
+    setIsLogin: (state, action) => {
+      state.isLogin = action.payload;
     },
 
     setIsModalOpen: (state, action) => {
       state.isModalOpen = action.payload;
+    },
+
+    clearUserData: (state) => {
+      state.userData = null;
     },
   },
 
@@ -54,6 +58,7 @@ const userSlice = createSlice({
 
     builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
       state.userData = action.payload;
+      state.error = null;
       state.isLoading = false;
     });
 
@@ -78,6 +83,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { toggleIsLogin, setIsModalOpen } = userSlice.actions;
+export const { setIsLogin, setIsModalOpen, clearUserData } = userSlice.actions;
 
 export default userSlice.reducer;

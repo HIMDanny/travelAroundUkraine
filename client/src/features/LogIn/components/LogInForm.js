@@ -7,7 +7,7 @@ import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import postLogIn from '../../../api/postLogIn';
-import { toggleIsLogin } from '../../../store/slices/userSlice/userSlice';
+import { setIsLogin } from '../../../store/slices/userSlice/userSlice';
 import { migrateCart } from '../../../store/slices/cartSlice/cartSlice';
 
 const buttonSX = {
@@ -45,7 +45,7 @@ const LogInForm = () => {
       localStorage.setItem('token', response.token);
       setErrorMassage(null);
       navigate('/');
-      dispatch(toggleIsLogin());
+      dispatch(setIsLogin(true));
       dispatch(migrateCart());
     } else {
       setErrorMassage(response?.password || response?.loginOrEmail);
@@ -84,7 +84,9 @@ const LogInForm = () => {
                   <Field component={TextField} type="password" name="password" label="Password" fullWidth />
                 </Grid>
               </Grid>
-              {errorMassage && <Typography sx={{ color: '#d32f2f', textAlign: 'center' }}>{errorMassage}</Typography>}
+              {errorMassage && (
+                <Typography sx={{ color: '#d32f2f', textAlign: 'center' }}>Password or login is not correct</Typography>
+              )}
               <Box sx={{ my: { xs: 1.5, laptop: 2.5 } }}>
                 <Button sx={buttonSX} onClick={handleClickSignUp}>
                   sign up

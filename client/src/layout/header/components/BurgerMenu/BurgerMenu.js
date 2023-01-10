@@ -93,7 +93,7 @@ const transformOrigin = {
 
 const BurgerMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const { isLogin } = useSelector((store) => store.userReducer);
+  const { isLogin } = useSelector((store) => store.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

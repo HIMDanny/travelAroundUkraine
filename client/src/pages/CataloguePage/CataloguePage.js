@@ -16,7 +16,6 @@ const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ t
 
   [theme.breakpoints.up('laptop')]: {
     width: 295,
-    order: '-1',
   },
 }));
 
@@ -25,7 +24,7 @@ const CataloguePage = () => {
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const isLoading = useSelector((state) => state.catalogue.isLoading);
   const inFavorites = useSelector((state) => state.favorites.inFavorites);
-  const isLogin = useSelector((state) => state.userReducer.isLogin);
+  const isLogin = useSelector((store) => store.user.isLogin);
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage = 5;
   let lastItemIndex = currentPage * countriesPerPage;
@@ -68,6 +67,9 @@ const CataloguePage = () => {
           <CatalogMainSection />
           <Container>
             <Grid container sx={{ mt: '60px', gap: '40px' }}>
+              <FilterContainer>
+                <CatalogMainFilter />
+              </FilterContainer>
               <Grid item xs={12} laptop sx={{ p: 0 }}>
                 {isFilter && filteredTours.length > 0 ? (
                   <Typography variant="h2" sx={{ mb: '25px' }}>
@@ -104,9 +106,6 @@ const CataloguePage = () => {
                   )}
                 </Stack>
               </Grid>
-              <FilterContainer>
-                <CatalogMainFilter />
-              </FilterContainer>
             </Grid>
           </Container>
           <Box sx={{ display: 'flex', justifyContent: 'center', pt: '50px' }}>

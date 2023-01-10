@@ -9,7 +9,7 @@ const FavoritesPage = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const inFavorites = useSelector((state) => state.favorites.inFavorites);
-  const isLogin = useSelector((state) => state.userReducer.isLogin);
+  const isLogin = useSelector((store) => store.user.isLogin);
   useEffect(() => {
     if (products.length <= 0) {
       dispatch(setIsLoading(true));

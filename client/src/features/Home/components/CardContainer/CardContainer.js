@@ -1,16 +1,14 @@
-import React, {useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import {Swiper, SwiperSlide} from 'swiper/react';
-import {Navigation} from 'swiper';
-import {Typography, styled, Container} from '@mui/material';
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {getProducts} from "../../../../store/slices/catalogueSlice/catalogueSlice";
-import {CardItem} from '..';
-import {SliderButton} from '../../../../components';
-
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper';
+import { Typography, styled, Container } from '@mui/material';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { getPopularProducts } from '../../../../store/slices/catalogueSlice/catalogueSlice';
+import { CardItem } from '..';
+import { SliderButton } from '../../../../components';
 
 import 'swiper/swiper.min.css';
-
 
 const CardContainerHeaderContainer = styled('div')({
   display: 'flex',
@@ -41,70 +39,76 @@ const CardContainerSwiperContainer = styled('div')({
 });
 
 const CardContainer = () => {
-
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.catalogue.products, shallowEqual);
+  const popularProducts = useSelector((state) => state.catalogue.popular, shallowEqual);
 
   useEffect(() => {
-      dispatch(getProducts());
+    dispatch(getPopularProducts());
   }, []);
 
   return (
-            <Container>
-              <CardContainerHeaderContainer>
-                <Typography variant="h2" sx={{marginBottom: '0px'}}>
-                  Popular tours
-                </Typography>
-                <Link to="/catalogue">
-                  <Typography>View All</Typography>
-                </Link>
-              </CardContainerHeaderContainer>
-              <CardContainerSwiperContainer>
-                <SliderButton id="previous" position={{top: '44%', left: '-30px', rotate: '180deg'}}/>
-                <SliderButton id="next" position={{top: '44%', right: '-30px'}}/>
-                <Swiper
-                    breakpoints={{
-                      265: {
-                        width: 265,
-                        slidesPerView: 1,
-                      },
-                      768: {
-                        width: 560,
-                        slidesPerView: 2,
-                      },
-                      1024: {
-                        width: 855,
-                        slidesPerView: 3,
-                      },
-                      1360: {
-                        width: 1150,
-                        slidesPerView: 4,
-                      },
-                    }}
-                    spaceBetween={30}
-                    slidesPerGroup={1}
-                    loop
-                    loopFillGroupWithBlank
-                    pagination={{
-                      clickable: true,
-                    }}
-                    navigation={{
-                      nextEl: '#next',
-                      prevEl: '#previous',
-                    }}
-                    modules={[Navigation]}
-                    className="mySwiper"
-                >
-                  {products &&
-                      products.map(({name, region, _id, imageUrls, currentPrice, itemNo}) => (
-                          <SwiperSlide key={_id}>
-                            <CardItem name={name} region={region} id={_id} imageUrls={imageUrls} currentPrice={currentPrice} itemNo={itemNo}/>
-                          </SwiperSlide>
-                      ))}
-                </Swiper>
-              </CardContainerSwiperContainer>
-            </Container>
-  )
+    <Container>
+      <CardContainerHeaderContainer>
+        <Typography variant="h2" sx={{ marginBottom: '0px' }}>
+          Popular tours
+        </Typography>
+        <Link to="/catalogue">
+          <Typography>View All</Typography>
+        </Link>
+      </CardContainerHeaderContainer>
+      <CardContainerSwiperContainer>
+        <SliderButton id="previous" position={{ top: '44%', left: '-30px', rotate: '180deg' }} />
+        <SliderButton id="next" position={{ top: '44%', right: '-30px' }} />
+        <Swiper
+          breakpoints={{
+            265: {
+              width: 265,
+              slidesPerView: 1,
+            },
+            768: {
+              width: 560,
+              slidesPerView: 2,
+            },
+            1024: {
+              width: 855,
+              slidesPerView: 3,
+            },
+            1360: {
+              width: 1150,
+              slidesPerView: 4,
+            },
+          }}
+          spaceBetween={30}
+          slidesPerGroup={1}
+          loop
+          loopFillGroupWithBlank
+          pagination={{
+            clickable: true,
+          }}
+          navigation={{
+            nextEl: '#next',
+            prevEl: '#previous',
+          }}
+          modules={[Navigation]}
+          className="mySwiper"
+        >
+          {popularProducts &&
+            popularProducts.map(({ name, region, _id, imageUrls, currentPrice, itemNo }) => (
+              <SwiperSlide key={_id}>
+                <CardItem
+                  name={name}
+                  region={region}
+                  id={_id}
+                  imageUrls={imageUrls}
+                  currentPrice={currentPrice}
+                  itemNo={itemNo}
+                />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      </CardContainerSwiperContainer>
+    </Container>
+  );
 };
 
 export default CardContainer;

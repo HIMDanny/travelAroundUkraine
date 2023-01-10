@@ -94,6 +94,7 @@ const HomePage = () => {
     <>
       <Box sx={{ position: 'relative' }} component="section">
         <ImageCarousel />
+
         <HeroContainer>
           <TravelText>
             TRAVEL <span className="heroHeaderHighlighted">around</span>
@@ -110,9 +111,11 @@ const HomePage = () => {
           </Button>
         </HeroContainer>
       </Box>
+
       <Box component="section" sx={{ mt: '60px' }}>
         <AboutUkraine />
       </Box>
+
       <Box component="section" sx={{ mt: '80px', mb: '150px' }}>
         <CardContainer />
       </Box>

@@ -85,7 +85,7 @@ const typograpySX = (link, pathname) => ({
 
 const TabletMenu = () => {
   const location = useLocation();
-  const { isLogin } = useSelector((store) => store.userReducer);
+  const { isLogin } = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
   const { pathname } = location;

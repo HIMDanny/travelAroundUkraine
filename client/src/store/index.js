@@ -9,7 +9,7 @@ import inFavoritesReducer from './slices/inFavoritesSlice/inFavoritesSlice';
 
 const store = configureStore({
   reducer: {
-    userReducer,
+    user: userReducer,
     tour: tourReducer,
     catalogue: catalogueReducer,
     cart: cartReducer,

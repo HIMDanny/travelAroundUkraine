@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import { TextField } from 'formik-mui';

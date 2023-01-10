@@ -1,14 +1,14 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
-// Form components
+import React, { useEffect } from 'react';
+// Formik
 import { Formik, Form } from 'formik';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { enAU } from 'date-fns/locale';
 // MUI Components
-import { Stepper, Step, StepLabel, Button, CircularProgress, Box } from '@mui/material';
-// Redux store
+import { Stepper, Step, StepLabel } from '@mui/material';
+// Redux
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { fetchUserInfo } from '../../../../store/slices/userSlice/userSlice';
 import {
   increaseStep,
   decreaseStep,
@@ -17,28 +17,33 @@ import {
 } from '../../../../store/slices/orderSlice/orderSlice';
 // Child Forms and model
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
-import { initialValues, validationSchema } from '../../data';
+import FormBttnContainer from '../../../../components/FormBttnContainer/FormBttnContainer';
+import { validationSchema } from '../../data';
+import setInitialValue from '../../utils/setInitialValue';
 
 const steps = ['User Details', 'Shipping Address', 'Payment Details'];
 
 const CheckoutForm = () => {
   const { currentStep, isLoading } = useSelector((state) => state.order, shallowEqual);
+  const isLogin = useSelector((store) => store.user.isLogin);
+  const userData = useSelector((store) => store.user.userData);
+
   const dispatch = useDispatch();
 
   const lastStep = steps.length - 1;
   const currentValidationSchema = validationSchema[currentStep];
 
-  const GoToNextStep = () => {
+  const goToNextStep = () => {
     dispatch(increaseStep());
   };
 
-  const GoToPrevStep = () => {
+  const goToPrevStep = () => {
     dispatch(decreaseStep());
   };
 
   const formSubmitHandler = async (values) => {
     if (currentStep !== lastStep) {
-      GoToNextStep();
+      goToNextStep();
       return;
     }
 
@@ -50,6 +55,12 @@ const CheckoutForm = () => {
       console.error(e);
     }
   };
+
+  useEffect(() => {
+    if (isLogin) {
+      dispatch(fetchUserInfo());
+    }
+  }, []);
 
   return (
     <>
@@ -64,29 +75,29 @@ const CheckoutForm = () => {
       {currentStep === steps.length ? (
         <CheckoutSummary />
       ) : (
-        <Formik initialValues={initialValues} validationSchema={currentValidationSchema} onSubmit={formSubmitHandler}>
+        <Formik
+          initialValues={setInitialValue(isLogin, userData)}
+          validationSchema={currentValidationSchema}
+          onSubmit={formSubmitHandler}
+        >
           {({ isSubmitting }) => (
             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
               <Form>
                 {currentStep === 0 && <UserDetailsForm />}
-                {currentStep === 1 && <ShippingAddressForm />}
-                {currentStep === 2 && <PaymentForm />}
-                <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3, position: 'relative' }}>
-                  {currentStep !== 0 && !isSubmitting && <Button onClick={GoToPrevStep}>Back</Button>}
 
-                  {!isLoading ? (
-                    <Button disabled={isSubmitting} type="submit">
-                      {currentStep !== lastStep ? 'Continue' : 'Confirm'}
-                    </Button>
-                  ) : (
-                    <CircularProgress
-                      size={50}
-                      sx={{
-                        color: 'primary.dark',
-                      }}
-                    />
-                  )}
-                </Box>
+                {currentStep === 1 && <ShippingAddressForm />}
+
+                {currentStep === 2 && <PaymentForm />}
+
+                <FormBttnContainer
+                  currentStep={currentStep}
+                  lastStep={lastStep}
+                  isLoading={isLoading}
+                  isSubmitting={isSubmitting}
+                  goToPrevStep={goToPrevStep}
+                  bttnText="Continue"
+                  bttnLastStepText="Confirm"
+                />
               </Form>
             </LocalizationProvider>
           )}

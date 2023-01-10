@@ -7,12 +7,18 @@ const catalogueSlice = createSlice({
   name: 'products',
   initialState: {
     products: [],
+    popular: [],
     isLoading: false,
   },
   reducers: {
     setProducts: (state, action) => {
       state.products = action.payload;
     },
+
+    setPopular: (state, action) => {
+      state.popular = action.payload;
+    },
+
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
@@ -21,7 +27,7 @@ const catalogueSlice = createSlice({
 
 export default catalogueSlice.reducer;
 
-export const { setProducts, setIsLoading } = catalogueSlice.actions;
+export const { setProducts, setPopular, setIsLoading } = catalogueSlice.actions;
 
 export const getProducts = () => async (dispatch) => {
   try {
@@ -29,8 +35,18 @@ export const getProducts = () => async (dispatch) => {
 
     if (status) {
       dispatch(setProducts(data));
+      dispatch(setPopular(data));
     }
   } catch (err) {
     console.error(err.message);
+  }
+};
+
+export const getPopularProducts = () => async (dispatch) => {
+  const { data, status } = await axios('/products/filter?isPopular=true');
+
+  if (status) {
+    const { products } = data;
+    dispatch(setPopular(products));
   }
 };

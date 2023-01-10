@@ -51,7 +51,7 @@ const Product = ({ name, currentPrice, itemNo, image, cartQuantity, description 
   return (
     <Stack component="li" onClick={handleClick} sx={productContainerSX} spacing={1}>
       <PoductImage component="img" image={image} alt="tour photo" />
-      <CardContent sx={{ padding: '0 30px 0 36px' }}>
+      <CardContent sx={{ p: ' 0 5%' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Typography variant="h3" sx={productTitleSX}>
             {name}

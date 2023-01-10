@@ -1,14 +1,18 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Stepper, StepLabel, Step, Button, Box, CircularProgress } from '@mui/material';
+// Formik
 import { Formik, Form } from 'formik';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { enAU } from 'date-fns/locale';
+// MUI Components
+import { Stepper, StepLabel, Step } from '@mui/material';
 
+import postSignUpData from '../../../../api/postSignUpData';
+
+// Child Forms and model
 import { initialValues, validationSchema } from '../../data';
 import { UserInfoForm, LoginInfoForm, SignupSuccess } from '..';
-import postSignUpData from '../../../../api/postSignUpData';
+import FormBttnContainer from '../../../../components/FormBttnContainer/FormBttnContainer';
 
 const steps = ['User Info', 'Login Info'];
 
@@ -24,7 +28,7 @@ const SignupForm = () => {
     setActiveStep((prev) => (prev >= lastStep ? prev : prev + 1));
   };
 
-  const previousStep = () => {
+  const goToPrevStep = () => {
     setActiveStep((prev) => prev - 1);
   };
 
@@ -58,24 +62,17 @@ const SignupForm = () => {
           <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
             <Form>
               {activeStep === 0 && <UserInfoForm />}
+
               {activeStep === 1 && <LoginInfoForm />}
 
-              <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3, position: 'relative' }}>
-                {activeStep !== 0 && !isSubmitting && <Button onClick={previousStep}>Back</Button>}
-
-                {!isSubmitting ? (
-                  <Button disabled={isSubmitting} type="submit">
-                    {activeStep !== lastStep ? 'Continue' : 'Sign up'}
-                  </Button>
-                ) : (
-                  <CircularProgress
-                    size={50}
-                    sx={{
-                      color: 'primary.dark',
-                    }}
-                  />
-                )}
-              </Box>
+              <FormBttnContainer
+                currentStep={activeStep}
+                lastStep={lastStep}
+                isSubmitting={isSubmitting}
+                goToPrevStep={goToPrevStep}
+                bttnText="Continue"
+                bttnLastStepText="Sign up"
+              />
             </Form>
           </LocalizationProvider>
         )}

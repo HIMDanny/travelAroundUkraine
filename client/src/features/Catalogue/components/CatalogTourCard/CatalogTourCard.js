@@ -66,7 +66,7 @@ const CatalogTourCard = ({
   inFavoritesCounter,
 }) => {
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.userReducer.isLogin);
+  const isLogin = useSelector((store) => store.user.isLogin);
   const navigate = useNavigate();
 
   return (

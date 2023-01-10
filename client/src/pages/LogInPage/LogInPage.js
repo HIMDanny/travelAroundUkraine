@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Paper, Typography, Slide } from '@mui/material';
 import { grey } from '@mui/material/colors';
-
 import LogInForm from '../../features/LogIn/components/LogInForm';
 
 const paperSX = {

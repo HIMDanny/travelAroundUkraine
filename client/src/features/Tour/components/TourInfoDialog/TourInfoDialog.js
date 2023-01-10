@@ -18,7 +18,8 @@ import formatTourDate from '../../utils/formatTourDate';
 import currencyConverter from '../../utils/currencyConverter';
 import convertData from '../../utils/convertData';
 
-import { addProduct } from '../../../../store/slices/cartSlice/cartSlice';
+import { addProduct, addProductToLocal } from '../../../../store/slices/cartSlice/cartSlice';
+import getProduct from '../../../../api/getProduct';
 
 const currencySymbol = {
   eur: '€',
@@ -114,7 +115,17 @@ const TourInfoDialog = ({
   const [currency, setCurrency] = useState('eur');
   const included = convertData(professionalGuide, accommodation, meals, transferAlongTheRoute, travelInsurance);
   const dispatch = useDispatch();
-  const isLogin = useSelector((store) => store.userReducer.isLogin);
+  const isLogin = useSelector((store) => store.user.isLogin);
+
+  const addBttnHandler = async () => {
+    if (isLogin) {
+      dispatch(addProduct(id));
+    } else {
+      // getProduct API function will be moved later to seperate folder within our store for refactoring purpose.
+      const product = await getProduct(itemNo);
+      dispatch(addProductToLocal(product));
+    }
+  };
 
   return (
     <BoxWrapper>
@@ -181,11 +192,7 @@ const TourInfoDialog = ({
             {currencySymbol[currency]}
             {currencyConverter(currentPrice, currency)}
           </Cost>
-          <Button
-            sx={{ paddingInline: '30px' }}
-            disableElevation
-            onClick={() => dispatch(addProduct(itemNo, id, isLogin))}
-          >
+          <Button sx={{ paddingInline: '30px' }} disableElevation onClick={addBttnHandler}>
             Add to Cart
           </Button>
         </Stack>

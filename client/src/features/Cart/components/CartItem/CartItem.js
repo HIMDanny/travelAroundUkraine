@@ -25,7 +25,15 @@ import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.sv
 import { AlertModal } from '../../../../components';
 
 // Redux Thunk functions
-import { addProduct, decreaseQuantity, deleteProduct } from '../../../../store/slices/cartSlice/cartSlice';
+import {
+  addProduct,
+  addProductToLocal,
+  decreaseQuantity,
+  deleteProduct,
+  decreaseProductFromLocal,
+  delProductFromLocal,
+} from '../../../../store/slices/cartSlice/cartSlice';
+import getProduct from '../../../../api/getProduct';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
   position: 'relative',
@@ -119,8 +127,22 @@ const CartItem = ({ imageUrls, name, currentPrice, duration, cartQuantity, itemN
   const handleDeleteDialogClose = () => setDeleteDialogOpen(false);
 
   const handleDeleteFromCart = () => {
-    dispatch(deleteProduct(id, isLogin));
+    isLogin ? dispatch(deleteProduct(id)) : dispatch(delProductFromLocal(id));
+
     setDeleteDialogOpen(false);
+  };
+
+  const increaseBtnHandler = async () => {
+    if (isLogin) {
+      dispatch(addProduct(id));
+    } else {
+      const product = await getProduct(itemNo);
+      dispatch(addProductToLocal(product));
+    }
+  };
+
+  const decreaseBtnHandler = () => {
+    isLogin ? dispatch(decreaseQuantity(id)) : dispatch(decreaseProductFromLocal(id));
   };
 
   if (!imageUrls || !name || !currentPrice || !duration || !cartQuantity || !itemNo || !id) return null;
@@ -151,11 +173,11 @@ const CartItem = ({ imageUrls, name, currentPrice, duration, cartQuantity, itemN
           </Stack>
 
           <Stack direction="row" marginY="5px">
-            <IconButton disabled={cartQuantity <= 1} onClick={() => dispatch(decreaseQuantity(id, isLogin))}>
+            <IconButton disabled={cartQuantity <= 1} onClick={decreaseBtnHandler}>
               <Remove />
             </IconButton>
             <AmountField value={cartQuantity} error={amountError} />
-            <IconButton onClick={() => dispatch(addProduct(itemNo, id, isLogin))}>
+            <IconButton onClick={increaseBtnHandler}>
               <Add />
             </IconButton>
           </Stack>

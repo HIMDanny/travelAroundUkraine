@@ -1,15 +1,15 @@
 import axiosConfig from '../axiosConfig';
 
-const getProduct = async (tourId) => {
+const getProduct = async (itemNo) => {
   try {
-    const { data, status } = await axiosConfig(`/products/${tourId}`);
+    const { data, status } = await axiosConfig(`/products/${itemNo}`);
 
     if (status === 200) {
       return data;
     }
   } catch (err) {
     console.error(err.message);
-    return err;
+    throw err;
   }
 };
 

@@ -14,7 +14,7 @@ import {
   CircularProgress,
   useMediaQuery,
 } from '@mui/material';
-import React, { useState, useEffect, shallowEqual } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useInView } from 'react-intersection-observer';
 
@@ -22,7 +22,7 @@ import { useInView } from 'react-intersection-observer';
 import { useParams } from 'react-router-dom';
 
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector,shallowEqual } from 'react-redux';
 import { fetchTour } from '../../store/slices/tourSlice/tourSlice';
 import { closeSnackBar } from '../../store/slices/cartSlice/cartSlice';
 

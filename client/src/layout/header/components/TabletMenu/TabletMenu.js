@@ -25,7 +25,7 @@ const loggedPages = [
   },
   {
     name: 'cart',
-    link: '/cart',
+    link: '/user-cart',
     innerContent: <ShoppingCartIcon fontSize="medium" />,
   },
   {
@@ -58,7 +58,7 @@ const unloggedPages = [
   },
   {
     name: 'cart',
-    link: '/cart',
+    link: '/user-cart',
     innerContent: <ShoppingCartIcon fontSize="medium" />,
   },
 ];

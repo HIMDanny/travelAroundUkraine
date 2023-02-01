@@ -21,7 +21,7 @@ const navigationMenu = [
   },
   {
     name: 'Cart',
-    path: '/cart',
+    path: '/user-cart',
   },
 ];
 

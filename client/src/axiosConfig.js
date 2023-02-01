@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosConfig = axios.create({
-  baseURL: 'https://nice-teal-skunk-tie.cyclic.app/',
+  baseURL: 'https://travelaroundukraine-production.up.railway.app/',
 });
 
 axiosConfig.interceptors.request.use(

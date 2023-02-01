@@ -37,6 +37,9 @@ const orderSlice = createSlice({
         state.currentStep -= 1;
       }
     },
+    resetStep: (state) => {
+      state.currentStep = 0;
+    },
     setIsModalOpen: (state, action) => {
       state.isModalOpen = action.payload;
     },
@@ -56,6 +59,6 @@ const orderSlice = createSlice({
   },
 });
 
-export const { increaseStep, decreaseStep, setIsModalOpen } = orderSlice.actions;
+export const { increaseStep, decreaseStep, resetStep, setIsModalOpen } = orderSlice.actions;
 
 export default orderSlice.reducer;

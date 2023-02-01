@@ -1,4 +1,4 @@
-import React, { useEffect,memo } from 'react';
+import React, { useEffect, memo } from 'react';
 // Formik
 import { Formik, Form } from 'formik';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -12,9 +12,11 @@ import { fetchUserInfo } from '../../../../store/slices/userSlice/userSlice';
 import {
   increaseStep,
   decreaseStep,
+  resetStep,
   createNewOrder,
   setIsModalOpen,
 } from '../../../../store/slices/orderSlice/orderSlice';
+import { deleteOnlineCart } from '../../../../store/slices/cartSlice/cartSlice';
 // Child Forms and model
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
 import FormBttnContainer from '../../../../components/FormBttnContainer/FormBttnContainer';
@@ -50,6 +52,8 @@ const CheckoutForm = () => {
     try {
       await dispatch(createNewOrder(values)).unwrap();
 
+      await dispatch(deleteOnlineCart()).unwrap();
+
       dispatch(setIsModalOpen(true));
     } catch (e) {
       console.error(e);
@@ -61,6 +65,8 @@ const CheckoutForm = () => {
       dispatch(fetchUserInfo());
     }
   }, []);
+
+  useEffect(() => () => dispatch(resetStep()), []);
 
   return (
     <>

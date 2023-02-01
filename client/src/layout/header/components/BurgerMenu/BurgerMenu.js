@@ -23,7 +23,7 @@ const loggedPages = [
   },
   {
     name: 'cart',
-    link: '/cart',
+    link: '/user-cart',
     innerContent: 'Cart',
   },
   {
@@ -52,7 +52,7 @@ const unloggedPages = [
   },
   {
     name: 'cart',
-    link: '/cart',
+    link: '/user-cart',
     innerContent: 'Cart',
   },
   {

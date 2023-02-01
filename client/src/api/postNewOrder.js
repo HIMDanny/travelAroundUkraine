@@ -63,7 +63,6 @@ const postNewOrder = async ({
     body.products = products;
   }
 
-  console.log('post new order', body);
   try {
     const { data } = await axiosConfig.post('/orders', body);
 

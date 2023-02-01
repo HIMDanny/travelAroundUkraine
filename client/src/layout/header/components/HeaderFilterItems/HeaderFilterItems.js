@@ -1,6 +1,7 @@
 /* eslint-disable arrow-body-style */
 import React, { memo } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Box, Paper, MenuList, MenuItem, Typography, styled } from '@mui/material';
 
 const ItemBox = styled(Box)({
@@ -13,11 +14,12 @@ const ItemBox = styled(Box)({
 });
 
 const HeaderFilterItems = () => {
+  const navigate = useNavigate();
   const { data, error } = useSelector((store) => store.searchBar, shallowEqual);
 
   //  TO DO ItemBox responsivness/adaptivness
-  const searchBarList = data.map(({ imageUrls, name, currentPrice, season }) => (
-    <MenuItem key={name}>
+  const searchBarList = data.map(({ imageUrls, name, currentPrice, season, itemNo }) => (
+    <MenuItem onClick={() => navigate(`/tour/${itemNo}`)} key={name}>
       <ItemBox>
         <Box sx={{ gridArea: '1 / 1 / 3 / 3' }}>
           <img src={imageUrls[0]} alt={name} width="90px" height="50px" />
@@ -46,6 +48,7 @@ const HeaderFilterItems = () => {
         minWidth: '200px',
         padding: '20px',
         maxHeight: '60vh',
+        overflowY: 'auto',
       }}
     >
       {data.length ? searchResults : null}

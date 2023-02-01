@@ -159,7 +159,7 @@ const TourPage = () => {
 
   useEffect(() => {
     dispatch(fetchTour(itemNo));
-  }, []);
+  }, [itemNo]);
 
   // components saved into constants
   const asideTourInfoDialog = (

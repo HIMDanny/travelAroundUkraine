@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import store from '../../../../store';
 import CheckoutForm from './CheckoutForm';
 
 jest.mock('@mui/material/Stepper', () => ({ children }) => <div>{children}</div>);
@@ -12,7 +14,11 @@ jest.mock('../../components/UserDetailsForm/UserDetailsForm', () => () => <div>U
 
 describe('CheckoutForm snapshot test', () => {
   test('should CheckoutForm match snapshot', () => {
-    const { asFragment } = render(<CheckoutForm />);
+    const { asFragment } = render(
+      <Provider store={store}>
+        <CheckoutForm />
+      </Provider>
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

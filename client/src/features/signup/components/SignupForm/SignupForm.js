@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,memo } from 'react';
 // Formik
 import { Formik, Form } from 'formik';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -83,4 +83,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default memo(SignupForm);

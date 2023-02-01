@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { styled, alpha, ToggleButton } from '@mui/material';
-import { setDuration } from '../../../../store/slices/filterSlice/filterSlice';
+import { setCategories } from '../../../../store/slices/filterSlice/filterSlice';
 
 const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
   borderRadius: 40,
   border: '1px solid #EDEDED',
   background: 'none',
   fontWeight: 500,
-  fontSize: 12,
+  fontSize: 13,
   textTransform: 'none',
-  padding: theme.spacing(1),
+  padding: theme.spacing(0.5),
   textAlign: 'center',
   width: '100%',
   color: theme.palette.text.primary,
@@ -23,7 +23,7 @@ const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
   },
 
   '&.Mui-selected': {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: `${alpha(theme.palette.primary.main, 0.85)}`,
     color: theme.palette.primary.contrastText,
 
     '&:hover': {
@@ -34,22 +34,21 @@ const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
 
 const OutlinedToggleButton = ({ value, children }) => {
   const dispatch = useDispatch();
-  const filterDuration = useSelector((store) => store.filter.duration);
+  const filterCategories = useSelector((store) => store.filter.categories);
 
-  const [selected, setSelected] = useState(filterDuration.includes(value));
+  const [selected, setSelected] = useState(false);
 
   useEffect(() => {
-    setSelected(filterDuration.includes(value))      
-  }, [filterDuration]);
+    setSelected(filterCategories.includes(value.toLowerCase()));
+  }, [filterCategories]);
 
-
-  const filterDurations = (duration) => {
+  const setfilterCategory = (category) => {
     setSelected((prev) => !prev);
-    dispatch(setDuration(duration));
+    dispatch(setCategories(category));
   };
 
   return (
-    <StyledToggleButton value={value} selected={selected} onChange={() => filterDurations(value)}>
+    <StyledToggleButton value={value} selected={selected} onChange={() => setfilterCategory(value.toLowerCase())}>
       {children}
     </StyledToggleButton>
   );
@@ -65,4 +64,4 @@ OutlinedToggleButton.defaultProps = {
   value: '',
 };
 
-export default OutlinedToggleButton;
+export default memo(OutlinedToggleButton);

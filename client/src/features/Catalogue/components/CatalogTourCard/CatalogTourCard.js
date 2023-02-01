@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent, Box } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PropTypes from 'prop-types';
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import FavoriteBorderSharpIcon from '@mui/icons-material/FavoriteBorderSharp';
 import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemtoWishList, deleteItemfromWishList } from '../../../../store/slices/inFavoritesSlice/inFavoritesSlice';
+import { addWishList, deleteFromWishList } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
@@ -61,9 +61,10 @@ const CatalogTourCard = ({
   description,
   imageUrls,
   id,
-  inFavorites,
   itemNo,
-  inFavoritesCounter,
+  isFavorite,
+  lastItem,
+  product,
 }) => {
   const dispatch = useDispatch();
   const isLogin = useSelector((store) => store.user.isLogin);
@@ -75,10 +76,16 @@ const CatalogTourCard = ({
       <CardContent sx={{ padding: '0 30px 0 36px' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <CardTitle>{name}</CardTitle>
-          {inFavorites === false ? (
-            <FavoriteBorderSharpIcon onClick={() => dispatch(addItemtoWishList(isLogin, id))} />
+          {isFavorite === false ? (
+            <FavoriteBorderSharpIcon
+              sx={{ cursor: 'pointer' }}
+              onClick={() => dispatch(addWishList({ isLogin, product, id }))}
+            />
           ) : (
-            <FavoriteSharpIcon onClick={() => dispatch(deleteItemfromWishList(isLogin, id, inFavoritesCounter))} />
+            <FavoriteSharpIcon
+              sx={{ cursor: 'pointer' }}
+              onClick={() => dispatch(deleteFromWishList({ isLogin, lastItem, id }))}
+            />
           )}
         </Box>
         <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>
@@ -113,12 +120,13 @@ CatalogTourCard.propTypes = {
   imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
   itemNo: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  inFavorites: PropTypes.bool.isRequired,
-  inFavoritesCounter: PropTypes.number,
+  isFavorite: PropTypes.bool.isRequired,
+  lastItem: PropTypes.bool,
+  product: PropTypes.object.isRequired,
 };
 
 CatalogTourCard.defaultProps = {
-  inFavoritesCounter: 0,
+  lastItem: false,
 };
 
-export default CatalogTourCard;
+export default memo(CatalogTourCard);

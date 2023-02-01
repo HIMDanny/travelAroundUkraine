@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import PropTypes from 'prop-types';
 import { styled, Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 
@@ -55,4 +55,4 @@ FilterAccordion.defaultProps = {
   children: <p />,
 };
 
-export default FilterAccordion;
+export default memo(FilterAccordion);

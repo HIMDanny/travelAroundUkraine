@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { styled, Box, Container, Typography } from '@mui/material';
 
 const MainSectionWrapper = styled(Box)(({ theme }) => ({
@@ -10,7 +10,7 @@ const MainSectionWrapper = styled(Box)(({ theme }) => ({
   height: 370,
   display: 'flex',
   alignItems: 'center',
- 
+
   [theme.breakpoints.up('tablet')]: {
     height: 510,
   },
@@ -26,7 +26,7 @@ const MainSectionText = styled(Typography)(({ theme }) => ({
   marginBottom: 0,
   color: theme.palette.primary.contrastText,
   textTransform: 'uppercase',
-  
+
   [theme.breakpoints.up('tablet')]: {
     fontsize: 44,
   },
@@ -34,15 +34,14 @@ const MainSectionText = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.up('laptop')]: {
     fontsize: 72,
   },
-
 }));
 
-const CatalogMainSection = () => (
+const CatalogHeroSection = () => (
   <MainSectionWrapper>
     <Container>
-      <MainSectionText variant='h1'>our tours</MainSectionText>
+      <MainSectionText variant="h1">our tours</MainSectionText>
     </Container>
   </MainSectionWrapper>
 );
 
-export default CatalogMainSection;
+export default memo(CatalogHeroSection);

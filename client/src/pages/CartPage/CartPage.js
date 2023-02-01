@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 
 import { Box, Container, Stack, styled, Typography } from '@mui/material';
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCart, setCartFromLocal } from '../../store/slices/cartSlice/cartSlice';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { fetchCart, setCartFromLocal, closeSnackBar } from '../../store/slices/cartSlice/cartSlice';
 
 import { CartItem, TotalInfoDialog } from '../../features/Cart/components';
+import { SnackBar } from '../../components';
 
 const ContentWrapper = styled(Stack)(({ theme }) => ({
   gap: theme.spacing(2),
@@ -27,17 +28,20 @@ const CartItemsList = styled((props) => <Stack component="ul" {...props} />)(({ 
 const CartPage = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((store) => store.user.isLogin);
-  const cart = useSelector((store) => store.cart.data);
+  const { data, snackBar } = useSelector((store) => store.cart, shallowEqual);
+  const { isSnackBarOpen, severity, text } = snackBar;
 
   useEffect(() => {
     isLogin ? dispatch(fetchCart()) : dispatch(setCartFromLocal());
   }, []);
 
+  const handleClose = () => dispatch(closeSnackBar());
+
   // components saved into constants
   const cartContentWrapper = (
     <ContentWrapper>
       <CartItemsList>
-        {cart.map(({ product: { imageUrls, name, currentPrice, duration, itemNo, _id }, cartQuantity }) => (
+        {data.map(({ product: { imageUrls, name, currentPrice, duration, itemNo, _id }, cartQuantity }) => (
           <li key={_id}>
             <CartItem
               imageUrls={imageUrls}
@@ -56,7 +60,7 @@ const CartPage = () => {
         </li>
       </CartItemsList>
       <Box flexGrow={1}>
-        <TotalInfoDialog cart={cart} />
+        <TotalInfoDialog cart={data} />
       </Box>
     </ContentWrapper>
   );
@@ -68,7 +72,7 @@ const CartPage = () => {
           Cart
         </Typography>
 
-        {cart.length ? (
+        {data.length ? (
           cartContentWrapper
         ) : (
           <Typography variant="h2" align="center">
@@ -76,6 +80,8 @@ const CartPage = () => {
           </Typography>
         )}
       </Container>
+
+      <SnackBar isOpen={isSnackBarOpen} severity={severity} text={text} handleClose={handleClose} />
     </Box>
   );
 };

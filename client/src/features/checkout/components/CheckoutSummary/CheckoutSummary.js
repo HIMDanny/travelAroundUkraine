@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import { Typography, Button } from '@mui/material';
 
 const CheckoutSummary = () => (
@@ -8,4 +8,4 @@ const CheckoutSummary = () => (
   </>
 );
 
-export default CheckoutSummary;
+export default memo(CheckoutSummary);

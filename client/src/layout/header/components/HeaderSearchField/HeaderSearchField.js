@@ -1,12 +1,14 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable  react/prop-types */
-import React, { useEffect, useState } from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
+import React, { memo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { styled, alpha, InputBase, ClickAwayListener } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import debounce from 'lodash.debounce';
 import appliedTheme from '../../../../theme/theme';
 import { HeaderFilterItems } from '..';
+import { searchProductByString, setIsSearchBarOpen } from '../../../../store/slices/searchBarSlice/searchBarSlice';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -44,6 +46,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
+
     [theme.breakpoints.up('mobile')]: {
       width: '12ch',
       '&:focus': {
@@ -56,35 +59,44 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const HeaderSearchField = () => {
-  const [isOpenFilterItems, setIsOpenFilterItems] = useState(false);
-  const handleFilter = () => {
-    setIsOpenFilterItems(false);
+  const isSearchBarOpen = useSelector((store) => store.searchBar.isSearchBarOpen);
+  const dispatch = useDispatch();
+
+  const closeSearchBar = () => {
+    dispatch(setIsSearchBarOpen(false));
   };
 
-  useEffect(() => {
-    document.addEventListener('click', handleFilter);
-  }, [isOpenFilterItems]);
-
-  const changeState = (length) => {
-    if (length >= 2) {
-      setIsOpenFilterItems(true);
+  const handleInputChange = (event) => {
+    if (event.target.value.length >= 2) {
+      dispatch(setIsSearchBarOpen(true));
+      dispatch(searchProductByString(event.target.value));
     } else {
-      setIsOpenFilterItems(false);
+      dispatch(setIsSearchBarOpen(false));
     }
   };
+
+  const handleInputFocus = (event) => {
+    if (event.target.value.length >= 2) {
+      dispatch(setIsSearchBarOpen(true));
+    }
+  };
+
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon sx={{ color: appliedTheme.palette.text.primary }} />
-      </SearchIconWrapper>
-      <StyledInputBase
-        onChange={(e) => changeState(e.target.value.length)}
-        placeholder="Search…"
-        inputProps={{ 'aria-label': 'search' }}
-      />
-      {isOpenFilterItems && <HeaderFilterItems />}
-    </Search>
+    <ClickAwayListener onClickAway={closeSearchBar}>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon sx={{ color: appliedTheme.palette.text.primary }} />
+        </SearchIconWrapper>
+        <StyledInputBase
+          onFocus={handleInputFocus}
+          onChange={debounce(handleInputChange, 750)}
+          placeholder="Search…"
+          inputProps={{ 'aria-label': 'search' }}
+        />
+        {isSearchBarOpen && <HeaderFilterItems closeSearchBar={closeSearchBar} />}
+      </Search>
+    </ClickAwayListener>
   );
 };
 
-export default HeaderSearchField;
+export default memo(HeaderSearchField);

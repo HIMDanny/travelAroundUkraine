@@ -1,4 +1,7 @@
 import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../../../../store';
 import CatalogTourCard from './CatalogTourCard';
 
 jest.mock('@mui/material/Stack', () => ({ children }) => <div>{children}</div>);
@@ -11,13 +14,17 @@ jest.mock('@mui/material/CardContent', () => ({ children }) => <div>{children}</
 describe('CatalogTourCard snapshot test', () => {
   test('should CatalogTourCard match snapshot', () => {
     const { asFragment } = render(
-      <CatalogTourCard
-        name="ItemName"
-        description="Itemdescription"
-        currentPrice={1}
-        duration="ItemDuration"
-        imageUrls={['ItemImage']}
-      />
+      <Provider store={store}>
+        <MemoryRouter>
+          <CatalogTourCard
+            name="ItemName"
+            description="Itemdescription"
+            currentPrice={1}
+            duration="ItemDuration"
+            imageUrls={['ItemImage']}
+          />
+        </MemoryRouter>
+      </Provider>
     );
     expect(asFragment()).toMatchSnapshot();
   });

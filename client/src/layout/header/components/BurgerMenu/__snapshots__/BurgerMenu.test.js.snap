@@ -18,24 +18,19 @@ exports[`Render BurgerMenu should BurgerMenu render 1`] = `
     </button>
     <ul>
       <li>
-        <a>
-          Home
-        </a>
+        Home
       </li>
       <li>
-        <a>
-          Catalogue
-        </a>
+        Catalogue
       </li>
       <li>
-        <a>
-          LogIn
-        </a>
+        LogIn
       </li>
       <li>
-        <a>
-          Cart
-        </a>
+        Cart
+      </li>
+      <li>
+        Favorites
       </li>
     </ul>
   </div>

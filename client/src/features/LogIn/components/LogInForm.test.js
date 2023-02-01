@@ -1,8 +1,8 @@
-import LogInForm from './LogInForm';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from '../../../store';
 import { render } from '@testing-library/react';
+import store from '../../../store';
+import LogInForm from './LogInForm';
 
 jest.mock('@mui/material/Box', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/Button', () => ({ children }) => <button>{children}</button>);

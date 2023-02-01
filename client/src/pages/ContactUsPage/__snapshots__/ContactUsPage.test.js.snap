@@ -199,58 +199,19 @@ exports[`HeaderFilterItems snapshot testing should render ContactsUsPage compone
       class="MuiBox-root css-0"
     >
       <span>
-        Get In Touch with Us
-      </span>
-      <span>
-        if you have some questions and you want to contact us personally - you can write your message to us and we will contact you as soon as possible!
+        Subscribe
       </span>
       <form
         action="#"
       >
         <div
-          class="MuiFormControl-root MuiFormControl-marginNormal MuiTextField-root css-1t5o43r-MuiFormControl-root-MuiTextField-root"
+          class="MuiFormControl-root MuiFormControl-marginNormal MuiTextField-root css-1ljgqgb-MuiFormControl-root-MuiTextField-root"
         >
           <label
             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="false"
             for=":r0:"
             id=":r0:-label"
-          >
-            Name
-          </label>
-          <div
-            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
-          >
-            <input
-              aria-invalid="false"
-              class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-              id=":r0:"
-              name="name"
-              type="text"
-              value=""
-            />
-            <fieldset
-              aria-hidden="true"
-              class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-            >
-              <legend
-                class="css-yjsfm1"
-              >
-                <span>
-                  Name
-                </span>
-              </legend>
-            </fieldset>
-          </div>
-        </div>
-        <div
-          class="MuiFormControl-root MuiFormControl-marginNormal MuiTextField-root css-1t5o43r-MuiFormControl-root-MuiTextField-root"
-        >
-          <label
-            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
-            data-shrink="false"
-            for=":r1:"
-            id=":r1:-label"
           >
             Email
           </label>
@@ -260,7 +221,7 @@ exports[`HeaderFilterItems snapshot testing should render ContactsUsPage compone
             <input
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-              id=":r1:"
+              id=":r0:"
               name="email"
               type="text"
               value=""
@@ -279,56 +240,13 @@ exports[`HeaderFilterItems snapshot testing should render ContactsUsPage compone
             </fieldset>
           </div>
         </div>
-        <div
-          class="MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth MuiTextField-root css-19jthap-MuiFormControl-root-MuiTextField-root"
-        >
-          <label
-            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
-            data-shrink="false"
-            for=":r2:"
-            id=":r2:-label"
-          >
-            Message
-          </label>
-          <div
-            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline css-8ewcdo-MuiInputBase-root-MuiOutlinedInput-root"
-          >
-            <textarea
-              aria-invalid="false"
-              class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input"
-              id=":r2:"
-              name="message"
-              rows="8"
-              style="height: 0px; overflow: hidden;"
-            />
-            <textarea
-              aria-hidden="true"
-              class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input"
-              readonly=""
-              style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px; width: 100%;"
-              tabindex="-1"
-            />
-            <fieldset
-              aria-hidden="true"
-              class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-            >
-              <legend
-                class="css-yjsfm1"
-              >
-                <span>
-                  Message
-                </span>
-              </legend>
-            </fieldset>
-          </div>
-        </div>
         <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1ey3g8u-MuiButtonBase-root-MuiButton-root"
           margin="normal"
           tabindex="0"
           type="submit"
         >
-          Send
+          Subscribe
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />

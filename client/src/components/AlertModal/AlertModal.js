@@ -1,3 +1,4 @@
+/* eslint-disable no-unneeded-ternary */
 import {
   Button as MuiButton,
   Dialog,
@@ -32,7 +33,7 @@ const AlertModal = ({ open, onClose, onSubmit, title, children, disableCancelBut
         </Button>
       )}
 
-      <Button onClick={onSubmit} success={success ? 'true' : null} disableElevation autoFocus>
+      <Button onClick={onSubmit} success={success === 'true' ? 'true' : null} disableElevation autoFocus>
         {submitButtonText}
       </Button>
     </DialogActions>

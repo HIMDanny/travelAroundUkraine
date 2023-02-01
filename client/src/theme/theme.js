@@ -85,14 +85,14 @@ const appliedTheme = createTheme({
 
       styleOverrides: {
         root: ({ ownerState }) => ({
-          ...(!ownerState.success
+          ...(ownerState.success
             ? {
-                background: colors.bttnBgPrimaryMain,
-                '&:hover': { background: colors.bttnBgPrimaryHover, color: colors.secondaryMain },
-              }
-            : {
                 background: colors.bttnBgSuccessMain,
                 '&:hover': { background: colors.bttnBgSuccessHover, color: colors.secondaryMain },
+              }
+            : {
+                background: colors.bttnBgPrimaryMain,
+                '&:hover': { background: colors.bttnBgPrimaryHover, color: colors.secondaryMain },
               }),
           padding: '16px 53px',
           borderRadius: '60px',

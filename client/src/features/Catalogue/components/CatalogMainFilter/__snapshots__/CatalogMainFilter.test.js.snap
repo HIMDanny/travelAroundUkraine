@@ -12,21 +12,15 @@ exports[`CatalogMainFilter snapshot test should CatalogTourCard match snapshot 1
           CATALOGUE FILTER PRICE
         </div>
         <div>
-          CATALOGUE FILTER TOURISTS
+          CATALOGUE FILTER REGION
         </div>
       </div>
       <div>
         <div>
-          CATALOGUE FILTER REGION
+          CATALOGUE FILTER TOURISTS
         </div>
       </div>
     </div>
-    <button>
-      Filter
-    </button>
-    <button>
-      Reset filter
-    </button>
   </div>
 </DocumentFragment>
 `;

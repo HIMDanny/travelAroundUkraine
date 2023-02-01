@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import React, { memo } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 import Grid from '@mui/material/Unstable_Grid2';
 import { FilterAccordion, OutlinedToggleButton } from '..';
-import { getProducts } from '../../../../store/slices/catalogueSlice/catalogueSlice';
-
+// import { fetchCatalogue } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 
 const CatalogFilterDuration = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
 
   const sorting = () => {
@@ -24,10 +23,10 @@ const CatalogFilterDuration = () => {
   };
 
   const sortingToursDuration = sorting();
-  
-  useEffect(() => {
-    dispatch(getProducts());
-  }, []);
+
+  // useEffect(() => {
+  //   dispatch(fetchCatalogue());
+  // }, []);
 
   return (
     <FilterAccordion title="Duration">
@@ -42,4 +41,4 @@ const CatalogFilterDuration = () => {
   );
 };
 
-export default CatalogFilterDuration;
+export default memo(CatalogFilterDuration);

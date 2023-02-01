@@ -6,9 +6,19 @@ exports[`Render Header should Header render 1`] = `
     <header>
       <div>
         <div>
-          <div>
-            LogoHeader
-          </div>
+          <a
+            aria-current="page"
+            class="active"
+            href="/"
+            style="text-decoration: none;"
+          >
+            <img
+              alt="logo"
+              height="50"
+              src="/assets/images/logo/logo.png"
+              width="65"
+            />
+          </a>
           <div>
             HeaderSearchField
           </div>

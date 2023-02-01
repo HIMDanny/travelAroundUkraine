@@ -14,11 +14,9 @@ exports[`PaymentSuccess snapshot test should PaymentSuccess render modal window 
       </div>
     </h3>
     <div>
-      <p />
       <p>
-        Your order number #425435 will be shipped shortly.
+        Your order number # will be shipped shortly.
       </p>
-      <p />
     </div>
     <div>
       <button>
@@ -29,4 +27,29 @@ exports[`PaymentSuccess snapshot test should PaymentSuccess render modal window 
 </DocumentFragment>
 `;
 
-exports[`PaymentSuccess snapshot test should PaymentSuccess render null 1`] = `<DocumentFragment />`;
+exports[`PaymentSuccess snapshot test should PaymentSuccess render null 1`] = `
+<DocumentFragment>
+  <div>
+    <h3>
+      <div>
+        <p>
+          Payment Successfull
+        </p>
+        <div>
+          ICON
+        </div>
+      </div>
+    </h3>
+    <div>
+      <p>
+        Your order number # will be shipped shortly.
+      </p>
+    </div>
+    <div>
+      <button>
+        Great !
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

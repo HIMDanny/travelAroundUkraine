@@ -1,5 +1,5 @@
 // React
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -224,4 +224,4 @@ CartItem.defaultProps = {
   isLogin: false,
 };
 
-export default CartItem;
+export default memo(CartItem);

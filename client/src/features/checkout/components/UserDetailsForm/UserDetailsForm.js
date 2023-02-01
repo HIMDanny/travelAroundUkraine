@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { TextField } from 'formik-mui';
 import { Field } from 'formik';
@@ -33,4 +33,4 @@ const UserDetailsForm = () => {
     </>
   );
 };
-export default UserDetailsForm;
+export default memo(UserDetailsForm);

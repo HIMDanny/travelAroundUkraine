@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
-import TourPage from './TourPage';
-
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
+import { Provider } from 'react-redux';
+import store from '../../store';
+import TourPage from './TourPage';
 
 jest.mock('@mui/material/Box', () => 'div');
 jest.mock('@mui/material/Stack', () => ({ children }) => <div>{children}</div>);
@@ -16,12 +17,16 @@ jest.mock('../../features/Tour/components/TourReasonToChoose/TourReasonToChoose'
   <div>TourReasonToChoose</div>
 ));
 
-let mockedMatchesMediaQuery = true;
+const mockedMatchesMediaQuery = true;
 jest.mock('@mui/material/useMediaQuery', () => jest.fn(() => mockedMatchesMediaQuery));
 
 describe('Tour Page snapshot testing', () => {
   test('should Tour Page match snapshot', () => {
-    const { asFragment } = render(<TourPage />);
+    const { asFragment } = render(
+      <Provider store={store}>
+        <TourPage />
+      </Provider>
+    );
     mockAllIsIntersecting(true);
 
     expect(asFragment()).toMatchSnapshot();

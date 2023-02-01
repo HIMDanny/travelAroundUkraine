@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { memo } from 'react';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -19,4 +19,4 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-export default ErrorBoundary;
+export default memo(ErrorBoundary);

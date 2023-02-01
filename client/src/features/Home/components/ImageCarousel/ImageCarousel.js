@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 
 import Carousel from 'react-material-ui-carousel';
 
@@ -29,4 +29,4 @@ const ImageCarousel = () => {
   );
 };
 
-export default ImageCarousel;
+export default memo(ImageCarousel);

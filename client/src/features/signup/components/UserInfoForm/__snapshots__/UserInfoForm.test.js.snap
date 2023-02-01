@@ -91,7 +91,7 @@ exports[`UserInfoForm snapshot test should UserInfoForm match snapshot 1`] = `
     <div>
       <input
         label="Birthdate"
-        name="birthDate"
+        name="birthdate"
         value=""
       />
     </div>
@@ -109,7 +109,7 @@ exports[`UserInfoForm snapshot test should UserInfoForm match snapshot 1`] = `
             aria-invalid="false"
             class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
             id=":r3:"
-            name="phone"
+            name="telephone"
             type="text"
             value=""
           />

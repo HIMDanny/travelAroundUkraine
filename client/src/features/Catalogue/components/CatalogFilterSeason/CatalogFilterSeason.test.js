@@ -1,4 +1,6 @@
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import store from '../../../../store';
 import CatalogFilterSeason from './CatalogFilterSeason';
 
 jest.mock('@mui/material/Box', () => ({ children }) => <div>{children}</div>);
@@ -9,7 +11,11 @@ jest.mock('../FilterAccordion/FilterAccordion', () => ({ children }) => <div>{ch
 
 describe('CatalogFilterSeason snapshot test', () => {
   test('should CatalogFilterSeason match snapshot', () => {
-    const { asFragment } = render(<CatalogFilterSeason />);
+    const { asFragment } = render(
+      <Provider store={store}>
+        <CatalogFilterSeason />
+      </Provider>
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

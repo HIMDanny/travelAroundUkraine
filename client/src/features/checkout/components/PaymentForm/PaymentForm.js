@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React,{memo} from 'react';
 import { Grid, Typography, FormLabel, Radio, FormControlLabel, styled } from '@mui/material';
 import { TextField, RadioGroup } from 'formik-mui';
 import { DatePicker } from 'formik-mui-x-date-pickers';
@@ -70,4 +70,4 @@ const PaymentForm = () => {
   );
 };
 
-export default PaymentForm;
+export default memo(PaymentForm);

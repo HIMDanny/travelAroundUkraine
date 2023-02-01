@@ -1,11 +1,10 @@
 /* eslint-disable react/forbid-prop-types */
-
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { styled, alpha } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import { Box as MuiBox, Button, IconButton, MenuItem as MuiMenuItem, Select as MuiSelect, Stack } from '@mui/material';
+
+// MUI
+import { Box as MuiBox, Button, IconButton, Stack, Typography, styled } from '@mui/material';
+
 // Icons
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -14,41 +13,19 @@ import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import CloseIcon from '@mui/icons-material/Close';
 
-import formatTourDate from '../../utils/formatTourDate';
-import currencyConverter from '../../utils/currencyConverter';
-import convertData from '../../utils/convertData';
-
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, addProductToLocal } from '../../../../store/slices/cartSlice/cartSlice';
 import getProduct from '../../../../api/getProduct';
 
-const currencySymbol = {
-  eur: '€',
-  usd: '$',
-  uah: '₴',
-};
+// Utils & Data
+import formatTourDate from '../../utils/formatTourDate';
+import currencyConverter from '../../utils/currencyConverter';
+import convertData from '../../utils/convertData';
+import currencySymbols from '../../../data/currencySymbols';
 
-const BoxWrapper = styled(MuiBox)(({ theme }) => ({
-  position: 'sticky',
-  top: 20,
-  padding: '20px 20px 30px',
-  borderRadius: 5,
-
-  '@media (min-width: 1051px)': {
-    border: `1px solid ${theme.palette.divider}`,
-  },
-}));
-
-const Section = styled(MuiBox)(({ theme }) => ({
-  borderBottom: `1px solid ${theme.palette.divider}`,
-  paddingBottom: 15,
-  marginBottom: 20,
-}));
-
-const Title = styled((props) => <Typography variant="h3" color="text.primary" {...props} />)({
-  textTransform: 'uppercase',
-  fontWeight: 700,
-  marginBottom: 20,
-});
+// Components
+import { BoxWrapper, Section, Title, Select, MenuItem } from '../../../../components';
 
 const IncludedContentWrapper = styled(MuiBox)({
   display: 'grid',
@@ -63,38 +40,6 @@ const Cost = styled(Typography)(({ theme }) => ({
   lineHeight: 1,
   color: theme.palette.primary.main,
 }));
-
-const Select = styled(MuiSelect)(({ theme }) => ({
-  marginBottom: '10px',
-  fontWeight: 700,
-  '.MuiOutlinedInput-notchedOutline': {
-    borderColor: `${theme.palette.divider}`,
-
-    transition: theme.transitions.create('border-color'),
-  },
-  '&:hover .MuiOutlinedInput-notchedOutline': {
-    borderColor: `${theme.palette.primary.main}`,
-  },
-  '.MuiSelect-icon': {
-    transition: theme.transitions.create('transform'),
-  },
-}));
-
-const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
-  transition: theme.transitions.create(['color', 'background-color']),
-
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.15),
-    color: theme.palette.primary.main,
-  },
-
-  '&.Mui-selected': {
-    color: theme.palette.primary.main,
-    fontWeight: 700,
-  },
-}));
-
-const DetailsText = styled((props) => <Typography gutterBottom={false} {...props} />)({});
 
 const TourInfoDialog = ({
   dates,
@@ -160,25 +105,25 @@ const TourInfoDialog = ({
         <Stack gap="5px">
           <Stack direction="row" alignItems="center" gap="5px">
             <AccessTimeIcon color="primary" />
-            <DetailsText>Duration</DetailsText>
-            <DetailsText marginLeft="auto">{duration}</DetailsText>
+            <Typography gutterBottom={false}>Duration</Typography>
+            <Typography marginLeft="auto">{duration}</Typography>
           </Stack>
           <Stack direction="row" alignItems="center" gap="5px">
             <FlightTakeoffIcon color="primary" />
-            <DetailsText>Departs</DetailsText>
-            <DetailsText marginLeft="auto">{departs}</DetailsText>
+            <Typography gutterBottom={false}>Departs</Typography>
+            <Typography marginLeft="auto">{departs}</Typography>
           </Stack>
           <Stack direction="row" alignItems="center" gap="5px">
             <KeyboardReturnIcon color="primary" />
-            <DetailsText>Returns</DetailsText>
-            <DetailsText marginLeft="auto">{returns}</DetailsText>
+            <Typography gutterBottom={false}>Returns</Typography>
+            <Typography marginLeft="auto">{returns}</Typography>
           </Stack>
         </Stack>
       </Section>
       <Section>
         <Title>Currency</Title>
         <Select fullWidth value={currency} onChange={(e) => setCurrency(e.target.value)} IconComponent={ExpandMoreIcon}>
-          {Object.keys(currencySymbol).map((key) => (
+          {Object.keys(currencySymbols).map((key) => (
             <MenuItem key={key} value={key}>
               {key.toUpperCase()}
             </MenuItem>
@@ -189,7 +134,7 @@ const TourInfoDialog = ({
         <Title>Total</Title>
         <Stack direction="row" justifyContent="space-between" alignItems="center">
           <Cost>
-            {currencySymbol[currency]}
+            {currencySymbols[currency]}
             {currencyConverter(currentPrice, currency)}
           </Cost>
           <Button sx={{ paddingInline: '30px' }} disableElevation onClick={addBttnHandler}>
@@ -234,4 +179,4 @@ TourInfoDialog.defaultProps = {
   itemNo: '',
 };
 
-export default TourInfoDialog;
+export default memo(TourInfoDialog);

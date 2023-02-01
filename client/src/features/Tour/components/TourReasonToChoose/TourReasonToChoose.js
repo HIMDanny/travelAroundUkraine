@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Paper as MuiPaper, styled, Typography, Box } from '@mui/material';
 import PropTypes from 'prop-types';
 
@@ -52,4 +52,4 @@ TourReasonToChoose.propTypes = {
   description: PropTypes.string.isRequired,
 };
 
-export default TourReasonToChoose;
+export default memo(TourReasonToChoose);

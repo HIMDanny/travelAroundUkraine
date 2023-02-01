@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React,{memo} from 'react';
 import { Typography, Box } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useSelector, useDispatch } from 'react-redux';
@@ -39,4 +39,4 @@ const PaymentSuccess = () => {
   );
 };
 
-export default PaymentSuccess;
+export default memo(PaymentSuccess);

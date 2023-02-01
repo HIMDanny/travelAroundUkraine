@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { TextField } from 'formik-mui';
 import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import postLogIn from '../../../api/postLogIn';
 import { setIsLogin } from '../../../store/slices/userSlice/userSlice';
-import { migrateCart } from '../../../store/slices/cartSlice/cartSlice';
+import { migrateCart, fetchCart } from '../../../store/slices/cartSlice/cartSlice';
 
 const buttonSX = {
   width: { xs: '86px', mobile: '110px', tablet: '140px', laptop: '150px' },
@@ -32,6 +32,7 @@ const gridItemSx = {
 const LogInForm = () => {
   const [errorMassage, setErrorMassage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const cart = useSelector((store) => store.cart.data);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,7 +47,13 @@ const LogInForm = () => {
       setErrorMassage(null);
       navigate('/');
       dispatch(setIsLogin(true));
-      dispatch(migrateCart());
+
+      dispatch(fetchCart())
+        .unwrap()
+        .then(() => {
+          const localCart = JSON.parse(localStorage.getItem('cart'));
+          localCart && dispatch(migrateCart(localCart));
+        });
     } else {
       setErrorMassage(response?.password || response?.loginOrEmail);
     }

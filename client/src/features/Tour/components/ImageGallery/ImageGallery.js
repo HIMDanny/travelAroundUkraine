@@ -16,20 +16,6 @@ export default function ImageGallery({ imageUrls }) {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  // const image = [
-  //   'http://placeimg.com/1200/800/nature',
-  //   'http://placeimg.com/800/1200/nature',
-  //   'http://placeimg.com/800/1200/nature',
-  //   'http://placeimg.com/1920/1080/nature',
-  //   'http://placeimg.com/1500/500/nature',
-  //   'http://placeimg.com/1500/500/nature',
-  //   'http://placeimg.com/800/1200/nature',
-  //   'http://placeimg.com/1500/500/nature',
-  //   'http://placeimg.com/1200/800/nature',
-  //   'http://placeimg.com/1200/800/nature',
-  //   'http://placeimg.com/1200/800/nature',
-  // ];
-
   function disableScroll() {
     document.body.classList.add('stop-scrolling');
   }

@@ -3,26 +3,26 @@
 exports[`Card Item Snapshot test should CardItem match snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="css-1iryrks"
+    class="css-s4pr79"
   >
     <h2>
-      $ 200.00
+      100 $
     </h2>
     <h2>
-      Kyiv city walk
+      name
     </h2>
     <div
-      class="css-h56svl"
+      class="css-1wyfxka"
     >
       <img
         alt="test img"
       />
       <h2>
-        Kyiv region
+        region region
       </h2>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-aib6je-MuiSvgIcon-root"
         data-testid="ArrowForwardIosIcon"
         focusable="false"
         viewBox="0 0 24 24"

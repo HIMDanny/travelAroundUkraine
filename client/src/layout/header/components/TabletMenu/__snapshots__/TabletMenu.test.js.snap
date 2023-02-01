@@ -13,6 +13,9 @@ exports[`Render TabletMenu should TabletMenu render 1`] = `
       LogIn
     </p>
     <p>
+      Favorites
+    </p>
+    <p>
       <svg
         aria-hidden="true"
         class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"

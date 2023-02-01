@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Box, Typography, styled } from '@mui/material';
 import { motion } from 'framer-motion';
 
@@ -84,30 +84,28 @@ const blockAnimation = {
   },
 };
 
-function AboutUkraine() {
-  return (
-    <motion.div initial="hidden" viewport={{ amount: 0.3 }} whileInView="visible" variants={blockAnimation}>
-      <UkraineBackground sx={{ position: 'relative' }}>
-        <AboutUkraineContainer>
-          <Typography variant="h2" sx={{ transition: '2s' }}>
-            What is Ukraine?
-          </Typography>
-          <UkraineTextInfo>
-            You are going to explore the largest country in Europe – a picturesque place where innovative creativity
-            meets ancient traditions, and wonderful legends come into reality. Upon the road you will come to know lots
-            of brave and kind-hearted people. They are fighting for freedom and dignity. They are searching for peace
-            and prosperity. They are transforming Ukraine into a modern country, unique business hub and new all-season
-            tourist destination.
-          </UkraineTextInfo>
-          <UkraineTextInfo>
-            Now get closer. The time has come to unlock the great and still less than fully realized potential of
-            Ukraine. It is our time. And it starts right NOW. So, you’ve got the answer to the question ‘What is
-            Ukraine?’… Welcome, and don’t forget to take a big backpack for some great memories with you!
-          </UkraineTextInfo>
-        </AboutUkraineContainer>
-      </UkraineBackground>
-    </motion.div>
-  );
-}
+const AboutUkraine = () => (
+  <motion.div initial="hidden" viewport={{ amount: 0.3 }} whileInView="visible" variants={blockAnimation}>
+    <UkraineBackground sx={{ position: 'relative' }}>
+      <AboutUkraineContainer>
+        <Typography variant="h2" sx={{ transition: '2s' }}>
+          What is Ukraine?
+        </Typography>
+        <UkraineTextInfo>
+          You are going to explore the largest country in Europe – a picturesque place where innovative creativity meets
+          ancient traditions, and wonderful legends come into reality. Upon the road you will come to know lots of brave
+          and kind-hearted people. They are fighting for freedom and dignity. They are searching for peace and
+          prosperity. They are transforming Ukraine into a modern country, unique business hub and new all-season
+          tourist destination.
+        </UkraineTextInfo>
+        <UkraineTextInfo>
+          Now get closer. The time has come to unlock the great and still less than fully realized potential of Ukraine.
+          It is our time. And it starts right NOW. So, you’ve got the answer to the question ‘What is Ukraine?’…
+          Welcome, and don’t forget to take a big backpack for some great memories with you!
+        </UkraineTextInfo>
+      </AboutUkraineContainer>
+    </UkraineBackground>
+  </motion.div>
+);
 
-export default AboutUkraine;
+export default memo(AboutUkraine);

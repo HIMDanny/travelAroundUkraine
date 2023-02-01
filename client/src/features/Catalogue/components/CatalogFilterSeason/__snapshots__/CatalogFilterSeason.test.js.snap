@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CatalogFilterRegion snapshot test should CatalogFilterRegion match snapshot 1`] = `
+exports[`CatalogFilterSeason snapshot test should CatalogFilterSeason match snapshot 1`] = `
 <DocumentFragment>
   <div>
     <label />

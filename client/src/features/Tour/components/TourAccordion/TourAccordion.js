@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { styled } from '@mui/material/styles';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
@@ -64,4 +64,4 @@ TourAccordion.defaultProps = {
   children: <p>Accordion text</p>,
 };
 
-export default TourAccordion;
+export default memo(TourAccordion);

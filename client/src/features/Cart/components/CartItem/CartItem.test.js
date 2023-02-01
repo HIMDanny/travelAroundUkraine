@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
+import store from '../../../../store';
 import CartItem from './CartItem';
 
 jest.mock('@mui/material/Stack', () => ({ children }) => <div>{children}</div>);
@@ -13,7 +16,13 @@ jest.mock('@mui/material/TextField', () => ({ children }) => <div>{children}</di
 
 describe('CartItem snapshot test', () => {
   test('should CartItem match snapshot', () => {
-    const { asFragment } = render(<CartItem />);
+    const { asFragment } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <CartItem />
+        </MemoryRouter>
+      </Provider>
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

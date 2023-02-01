@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React,{memo} from 'react';
 import { Typography, Box } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useNavigate } from 'react-router-dom';
@@ -37,4 +37,4 @@ const SignupSuccess = ({ open, onClose }) => {
   );
 };
 
-export default SignupSuccess;
+export default memo(SignupSuccess);

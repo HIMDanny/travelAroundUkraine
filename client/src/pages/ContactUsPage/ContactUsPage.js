@@ -17,6 +17,21 @@ const icons = [
   <TelegramIcon />,
 ];
 
+const StackContact = styled(Stack)(({ theme }) => ({
+  justifyContent: 'center',
+  columnGap: '200px',
+  margin: '120px 15px 100px 15px',
+
+  [theme.breakpoints.up('tablet')]: {
+    margin: '120px 30px 100px 30px',
+  },
+
+  [theme.breakpoints.up('laptop')]: {
+    flexDirection: 'row',
+    margin: '120px 50px 100px 50px',
+  },
+}));
+
 const SocialsContainer = styled(Stack)(() => ({
   display: 'flex',
   flexDirection: 'row',
@@ -38,28 +53,6 @@ const SocialItem = styled('a')(() => ({
   border: 'none',
   '&:hover': {
     backgroundColor: 'rgba(0, 75, 252, 0.04)',
-  },
-}));
-
-const StackContact = styled(Stack)(({ theme }) => ({
-  justifyContent: 'center',
-  margin: '120px 15px 100px 15px',
-
-  [theme.breakpoints.up('tablet')]: {
-    margin: '120px 30px 100px 30px',
-  },
-
-  [theme.breakpoints.up('laptop')]: {
-    flexDirection: 'row',
-    margin: '120px 50px 100px 50px',
-  },
-}));
-
-const TypographyBlock = styled(Typography)(({ theme }) => ({
-  marginTop: '50px',
-
-  [theme.breakpoints.up('laptop')]: {
-    marginTop: 0,
   },
 }));
 
@@ -104,17 +97,19 @@ const ContactUsPage = () => (
         <SocialsContainer>
           {icons.map((icon, i) => {
             const key = icon + i;
-            return <SocialItem key={key} href='https://google.com' target="_blank"> {icon} </SocialItem>;
+            return (
+              <SocialItem key={key} href="https://google.com" target="_blank">
+                {' '}
+                {icon}{' '}
+              </SocialItem>
+            );
           })}
         </SocialsContainer>
       </Box>
     </Box>
+
     <Box>
-      <TypographyBlock variant="h2">Get In Touch with Us</TypographyBlock>
-      <Typography sx={{ width: '90%' }}>
-        if you have some questions and you want to contact us personally - you can write your message to us and we will
-        contact you as soon as possible!
-      </Typography>
+      <Typography variant="h2">Subscribe</Typography>
       <ContactsForm />
     </Box>
   </StackContact>

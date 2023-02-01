@@ -4,76 +4,7 @@ exports[`HeaderFilterItems snapshot testing should render HeaderFilterItems comp
 <DocumentFragment>
   <div>
     <p>
-      found: 3
-    </p>
-    <ul>
-      <li>
-        <div>
-          <div>
-            <img
-              alt="karpaty"
-              src="../../assets/images/headerFilter/1.jpeg"
-            />
-          </div>
-          <div>
-            karpaty - 1 day + spa
-          </div>
-          <div>
-             4000 uah
-          </div>
-          <div>
-            1 day
-          </div>
-        </div>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <div>
-          <div>
-            <img
-              alt="karpaty"
-              src="../../assets/images/headerFilter/2.jpeg"
-            />
-          </div>
-          <div>
-            winter karpaty
-          </div>
-          <div>
-             3500 uah
-          </div>
-          <div>
-            2 day
-          </div>
-        </div>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <div>
-          <div>
-            <img
-              alt="karpaty"
-              src="../../assets/images/headerFilter/3.jpeg"
-            />
-          </div>
-          <div>
-            weel in karpaty
-          </div>
-          <div>
-             7000 uah
-          </div>
-          <div>
-            7 day
-          </div>
-        </div>
-      </li>
-    </ul>
-    <p>
-      no results.
-    </p>
-    <p>
-      please, change your request
+      No results found
     </p>
   </div>
 </DocumentFragment>

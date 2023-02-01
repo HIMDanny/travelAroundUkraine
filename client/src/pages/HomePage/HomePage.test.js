@@ -1,6 +1,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/prop-types */
 import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import HomePage from './HomePage';
 
 jest.mock('@mui/material/Box', () => ({ children }) => <section>{children}</section>);
@@ -13,7 +14,11 @@ jest.mock('../../features/Home/components/CardContainer/CardContainer', () => ()
 
 describe('Home page Snapshot test', () => {
   test('should HomePage match snapshot', () => {
-    const { asFragment } = render(<HomePage />);
+    const { asFragment } = render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

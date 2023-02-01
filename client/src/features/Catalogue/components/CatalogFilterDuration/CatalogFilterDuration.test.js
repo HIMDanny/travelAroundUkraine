@@ -1,4 +1,6 @@
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import store from '../../../../store';
 import CatalogFilterDuration from './CatalogFilterDuration';
 
 jest.mock('@mui/material/ToggleButton', () => ({ children }) => <button>{children}</button>);
@@ -9,7 +11,11 @@ jest.mock('../OutlinedToggleButton/OutlinedToggleButton', () => () => <button>te
 
 describe('CatalogFilterDuration snapshot test', () => {
   test('should CatalogFilterDuration match snapshot', () => {
-    const { asFragment } = render(<CatalogFilterDuration />);
+    const { asFragment } = render(
+      <Provider store={store}>
+        <CatalogFilterDuration />
+      </Provider>
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

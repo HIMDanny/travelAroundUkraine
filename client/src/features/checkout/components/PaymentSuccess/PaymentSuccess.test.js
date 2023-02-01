@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import store from '../../../../store';
 import PaymentSuccess from './PaymentSuccess';
 
 jest.mock('@mui/material/Typography', () => ({ children }) => <p>{children}</p>);
@@ -16,12 +18,20 @@ const steps = ['User Details', 'Shipping Address', 'Payment Details'];
 
 describe('PaymentSuccess snapshot test', () => {
   test('should PaymentSuccess render null', () => {
-    const { asFragment } = render(<PaymentSuccess steps={steps} activeStep={0} />);
+    const { asFragment } = render(
+      <Provider store={store}>
+        <PaymentSuccess steps={steps} activeStep={0} />
+      </Provider>
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 
   test('should PaymentSuccess render modal window', () => {
-    const { asFragment } = render(<PaymentSuccess steps={steps} activeStep={3} />);
+    const { asFragment } = render(
+      <Provider store={store}>
+        <PaymentSuccess steps={steps} activeStep={3} />
+      </Provider>
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

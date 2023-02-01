@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import { Field } from 'formik';
 import { TextField, RadioGroup } from 'formik-mui';
 import { DatePicker } from 'formik-mui-x-date-pickers';
@@ -58,4 +58,4 @@ const UserInfoForm = () => {
   );
 };
 
-export default UserInfoForm;
+export default memo(UserInfoForm);

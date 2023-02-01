@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React,{memo} from 'react';
 import { Grid, Typography } from '@mui/material';
 import { TextField } from 'formik-mui';
 import { Field } from 'formik';
@@ -43,4 +43,4 @@ const ShippingAddressForm = () => {
   );
 };
 
-export default ShippingAddressForm;
+export default memo(ShippingAddressForm);

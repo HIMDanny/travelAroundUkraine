@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import store from '../../store';
 import CartPage from './CartPage';
 
 jest.mock('@mui/material/Stack', () => ({ children }) => <div>{children}</div>);
@@ -12,7 +14,11 @@ jest.mock('../../features/Cart/components/TotalInfoDialog/TotalInfoDialog', () =
 
 describe('CartPage snapshot test', () => {
   test('should CartPage match snapshot', () => {
-    const { asFragment } = render(<CartPage />);
+    const { asFragment } = render(
+      <Provider store={store}>
+        <CartPage />
+      </Provider>
+    );
 
     expect(asFragment()).toMatchSnapshot();
   });

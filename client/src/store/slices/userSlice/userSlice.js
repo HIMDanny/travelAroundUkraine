@@ -10,9 +10,6 @@ const initialState = {
   userData: null,
   error: null,
   isLoading: false,
-  orders: null,
-  isOrdersLoading: false,
-  ordersError: null,
 };
 
 export const fetchUserInfo = createAsyncThunk('user/feacthUserInfo', async (_, { rejectWithValue }) => {

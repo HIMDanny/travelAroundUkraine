@@ -25,9 +25,13 @@ exports[`CheckoutForm snapshot test should CheckoutForm match snapshot 1`] = `
     <div>
       USER DETAILS FORM
     </div>
-    <button>
-      Continue
-    </button>
+    <div
+      class="MuiBox-root css-1s9g7sl"
+    >
+      <button>
+        Continue
+      </button>
+    </div>
   </form>
   <div>
     PAYMENT SUCCESS

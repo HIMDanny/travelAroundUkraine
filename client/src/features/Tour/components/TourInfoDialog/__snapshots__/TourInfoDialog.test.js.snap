@@ -3,35 +3,24 @@
 exports[`TourInfoDialog snapshot testing should TourInfoDialog with close button match snapshot 1`] = `
 <DocumentFragment>
   <div>
+    <button>
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="CloseIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+      </svg>
+    </button>
     <div>
       <p>
         Included
       </p>
-      <button>
-        <svg
-          aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-          data-testid="CloseIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-          />
-        </svg>
-      </button>
-      <div>
-        <div>
-          <p>
-            Professional guide
-          </p>
-        </div>
-        <div>
-          <p>
-            Accomodation
-          </p>
-        </div>
-      </div>
+      <div />
     </div>
     <div>
       <p>
@@ -78,7 +67,7 @@ exports[`TourInfoDialog snapshot testing should TourInfoDialog with close button
             Duration
           </p>
           <p>
-            3 days
+            Unknown
           </p>
         </div>
         <div>
@@ -97,7 +86,7 @@ exports[`TourInfoDialog snapshot testing should TourInfoDialog with close button
             Departs
           </p>
           <p>
-            First city
+            Unknown
           </p>
         </div>
         <div>
@@ -116,7 +105,7 @@ exports[`TourInfoDialog snapshot testing should TourInfoDialog with close button
             Returns
           </p>
           <p>
-            Second city
+            Unknown
           </p>
         </div>
       </div>
@@ -143,7 +132,7 @@ exports[`TourInfoDialog snapshot testing should TourInfoDialog with close button
       </p>
       <div>
         <p>
-          €70
+          €0
         </p>
         <button>
           Add to Cart
@@ -161,18 +150,7 @@ exports[`TourInfoDialog snapshot testing should TourInfoDialog without close but
       <p>
         Included
       </p>
-      <div>
-        <div>
-          <p>
-            Professional guide
-          </p>
-        </div>
-        <div>
-          <p>
-            Accomodation
-          </p>
-        </div>
-      </div>
+      <div />
     </div>
     <div>
       <p>
@@ -219,7 +197,7 @@ exports[`TourInfoDialog snapshot testing should TourInfoDialog without close but
             Duration
           </p>
           <p>
-            3 days
+            Unknown
           </p>
         </div>
         <div>
@@ -238,7 +216,7 @@ exports[`TourInfoDialog snapshot testing should TourInfoDialog without close but
             Departs
           </p>
           <p>
-            First city
+            Unknown
           </p>
         </div>
         <div>
@@ -257,7 +235,7 @@ exports[`TourInfoDialog snapshot testing should TourInfoDialog without close but
             Returns
           </p>
           <p>
-            Second city
+            Unknown
           </p>
         </div>
       </div>
@@ -284,7 +262,7 @@ exports[`TourInfoDialog snapshot testing should TourInfoDialog without close but
       </p>
       <div>
         <p>
-          €70
+          €0
         </p>
         <button>
           Add to Cart

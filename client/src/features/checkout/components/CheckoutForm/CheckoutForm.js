@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,memo } from 'react';
 // Formik
 import { Formik, Form } from 'formik';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -109,4 +109,4 @@ const CheckoutForm = () => {
   );
 };
 
-export default CheckoutForm;
+export default memo(CheckoutForm);

@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { Typography, styled, Container } from '@mui/material';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { getPopularProducts } from '../../../../store/slices/catalogueSlice/catalogueSlice';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { fetchPopularProducts } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 import { CardItem } from '..';
 import { SliderButton } from '../../../../components';
 
@@ -43,7 +43,7 @@ const CardContainer = () => {
   const popularProducts = useSelector((state) => state.catalogue.popular, shallowEqual);
 
   useEffect(() => {
-    dispatch(getPopularProducts());
+    dispatch(fetchPopularProducts());
   }, []);
 
   return (
@@ -92,7 +92,7 @@ const CardContainer = () => {
           modules={[Navigation]}
           className="mySwiper"
         >
-          {popularProducts &&
+          {popularProducts.length &&
             popularProducts.map(({ name, region, _id, imageUrls, currentPrice, itemNo }) => (
               <SwiperSlide key={_id}>
                 <CardItem
@@ -111,4 +111,4 @@ const CardContainer = () => {
   );
 };
 
-export default CardContainer;
+export default memo(CardContainer);

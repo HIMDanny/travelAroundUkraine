@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import SmartphoneOutlinedIcon from '@mui/icons-material/SmartphoneOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined';
@@ -267,4 +267,4 @@ const Footer = () => (
   </FooterContainer>
 );
 
-export default Footer;
+export default memo(Footer);

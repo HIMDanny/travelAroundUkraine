@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unneeded-ternary */
 import {
   alpha,
@@ -10,9 +11,10 @@ import {
   Stack,
   styled,
   Typography,
+  CircularProgress,
   useMediaQuery,
 } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, shallowEqual } from 'react';
 
 import { useInView } from 'react-intersection-observer';
 
@@ -22,15 +24,17 @@ import { useParams } from 'react-router-dom';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTour } from '../../store/slices/tourSlice/tourSlice';
+import { closeSnackBar } from '../../store/slices/cartSlice/cartSlice';
 
 import { TourAccordion, TourInfoDialog, TourReasonToChoose, ImageGallery } from '../../features/Tour/components';
+import { SnackBar } from '../../components';
 
 const sections = [
-  { title: 'About us', link: '#about-tour' },
+  { title: 'About tour', link: '#about-tour' },
   { title: 'Reasons to choose', link: '#reasons-to-choose' },
-  { title: 'What is included?', link: '#included' },
 ];
 
+// TODO: make dates come from server instead of placeholders
 const dates = { beginDate: new Date('2022-02-01'), endDate: new Date('2022-02-25') };
 
 const HeaderContent = styled(Box)(({ theme }) => ({
@@ -128,7 +132,11 @@ const TourPage = () => {
 
   const dispatch = useDispatch();
   const { itemNo } = useParams();
-  // to be revised in future from re rendering and optimizing point of view, whether we pass needed data as props to components or useSelector directly in each component.
+  const { data, error, isLoading } = useSelector((store) => store.tour, shallowEqual);
+  const { isSnackBarOpen, severity, text } = useSelector((store) => store.cart.snackBar);
+
+  const handleClose = () => dispatch(closeSnackBar());
+
   const {
     imageUrls,
     name,
@@ -147,9 +155,7 @@ const TourPage = () => {
     categories,
     season,
     _id,
-  } = useSelector((store) => store.tour.data);
-
-  const error = useSelector((store) => store.tour.error);
+  } = data;
 
   useEffect(() => {
     dispatch(fetchTour(itemNo));
@@ -227,7 +233,7 @@ const TourPage = () => {
     ));
   }
 
-  return (
+  const tour = (
     <>
       <HeaderContent>
         <Container>
@@ -243,14 +249,15 @@ const TourPage = () => {
               },
             }}
           >
-            {/* temporary UI which will revised after tour page refactor pull request is approved */}
-            {error ? error : name}
+            {name}
           </Typography>
+
           <Stack direction="row" justifyContent="center" alignItems="center" mb={3}>
             <Typography>{season} / </Typography>
             <Typography>{region} / </Typography>
             <Typography>{categories}</Typography>
           </Stack>
+
           <ImageGallery imageUrls={imageUrls} />
           <Nav>
             <LinksWrapper>
@@ -292,6 +299,30 @@ const TourPage = () => {
 
         {matchesMediaQuery ? null : slideInfoBar}
       </MainContent>
+    </>
+  );
+
+  const spinner = (
+    <Container>
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress size={150} sx={{ color: 'primary.dark', my: '30vh', mx: 'auto' }} />
+      </Box>
+    </Container>
+  );
+
+  if (error)
+    return (
+      <Container>
+        <Typography align="center" variant="h2" sx={{ color: 'error.main', marginTop: '30vh', marginBottom: '30vh' }}>
+          {error}
+        </Typography>
+      </Container>
+    );
+
+  return (
+    <>
+      {isLoading ? spinner : tour}
+      <SnackBar isOpen={isSnackBarOpen} handleClose={handleClose} severity={severity} text={text} />
     </>
   );
 };

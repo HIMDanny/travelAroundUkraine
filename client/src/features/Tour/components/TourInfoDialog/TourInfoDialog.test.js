@@ -1,4 +1,6 @@
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import store from '../../../../store';
 import TourInfoDialog from './TourInfoDialog';
 
 jest.mock('@mui/material/Box', () => ({ children }) => <div>{children}</div>);
@@ -31,14 +33,20 @@ const details = {
 
 describe('TourInfoDialog snapshot testing', () => {
   test('should TourInfoDialog without close button match snapshot', () => {
-    const { asFragment } = render(<TourInfoDialog included={included} cost={cost} dates={dates} details={details} />);
+    const { asFragment } = render(
+      <Provider store={store}>
+        <TourInfoDialog included={included} cost={cost} dates={dates} details={details} />
+      </Provider>
+    );
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   test('should TourInfoDialog with close button match snapshot', () => {
     const { asFragment } = render(
-      <TourInfoDialog included={included} cost={cost} dates={dates} details={details} closeButton />
+      <Provider store={store}>
+        <TourInfoDialog included={included} cost={cost} dates={dates} details={details} closeButton />
+      </Provider>
     );
 
     expect(asFragment()).toMatchSnapshot();

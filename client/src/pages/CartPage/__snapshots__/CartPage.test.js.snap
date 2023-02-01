@@ -7,30 +7,9 @@ exports[`CartPage snapshot test should CartPage match snapshot 1`] = `
       <p>
         Cart
       </p>
-      <div>
-        <div>
-          <li>
-            <div>
-              Cart item
-            </div>
-          </li>
-          <li>
-            <div>
-              Cart item
-            </div>
-          </li>
-          <li>
-            <div>
-              Cart item
-            </div>
-          </li>
-        </div>
-        <div>
-          <div>
-            Total info dialog
-          </div>
-        </div>
-      </div>
+      <p>
+        Your cart is empty!
+      </p>
     </div>
   </div>
 </DocumentFragment>

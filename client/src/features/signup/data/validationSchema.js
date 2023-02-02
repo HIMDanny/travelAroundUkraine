@@ -23,7 +23,10 @@ export default [
       .matches(nameRegExp, 'Allowed letters are only a-z, A-Z')
       .required(`${lastName.requiredErrorMsg}`),
 
-    [telephone.name]: yup.string().matches(phoneRegExp, 'Phone number invalid, please enter a Ukranian phone number'),
+    [telephone.name]: yup
+      .string()
+      .matches(phoneRegExp, `${telephone.invalidErrorMsg}`)
+      .required(`${telephone.requiredErrorMsg}`),
   }),
 
   yup.object().shape({

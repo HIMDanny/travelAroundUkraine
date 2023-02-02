@@ -1,4 +1,4 @@
-import React,{memo} from 'react';
+import React, { memo } from 'react';
 import { Field } from 'formik';
 import { TextField, RadioGroup } from 'formik-mui';
 import { DatePicker } from 'formik-mui-x-date-pickers';
@@ -51,7 +51,13 @@ const UserInfoForm = () => {
         </Grid>
 
         <Grid item xs={12} laptop={4}>
-          <Field component={TextField} name={telephone.name} label={telephone.label} fullWidth />
+          <Field
+            component={TextField}
+            name={telephone.name}
+            label={telephone.label}
+            placeholder="+380123456789"
+            fullWidth
+          />
         </Grid>
       </Grid>
     </>

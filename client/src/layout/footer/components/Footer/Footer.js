@@ -23,6 +23,10 @@ const navigationMenu = [
     name: 'Cart',
     path: '/user-cart',
   },
+  {
+    name: 'Contacts',
+    path: '/contacts',
+  },
 ];
 
 const footerGallery = [

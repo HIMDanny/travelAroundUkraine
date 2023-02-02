@@ -1,4 +1,4 @@
-import React,{memo} from 'react';
+import React, { memo } from 'react';
 import { Field } from 'formik';
 import { TextField } from 'formik-mui';
 import { Grid, Typography } from '@mui/material';
@@ -22,11 +22,18 @@ const LoginInfoForm = () => {
         </Grid>
 
         <Grid item xs={12} laptop={6}>
-          <Field component={TextField} name={password.name} label={password.label} fullWidth required />
+          <Field component={TextField} name={password.name} label={password.label} type="password" fullWidth required />
         </Grid>
 
         <Grid item xs={12} laptop={6}>
-          <Field component={TextField} name={retypePassword.name} label={retypePassword.label} fullWidth required />
+          <Field
+            component={TextField}
+            name={retypePassword.name}
+            label={retypePassword.label}
+            type="password"
+            fullWidth
+            required
+          />
         </Grid>
       </Grid>
     </>

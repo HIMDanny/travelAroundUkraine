@@ -27,6 +27,11 @@ const loggedPages = [
     innerContent: 'Cart',
   },
   {
+    name: 'favorites',
+    link: '/favorites',
+    innerContent: 'Favorites',
+  },
+  {
     name: 'logOut',
     link: null,
     innerContent: 'LogOut',

@@ -4,6 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
 import { setIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
 
 const loggedPages = [
@@ -22,6 +23,11 @@ const loggedPages = [
     link: null,
     innerContent: 'LogOut',
     onClick: (dispatch) => dispatch(setIsModalOpen(true)),
+  },
+  {
+    name: 'favorites',
+    link: '/favorites',
+    innerContent: <FavoriteSharpIcon fontSize="medium" />,
   },
   {
     name: 'cart',
@@ -54,7 +60,7 @@ const unloggedPages = [
   {
     name: 'favorites',
     link: '/favorites',
-    innerContent: 'Favorites',
+    innerContent: <FavoriteSharpIcon fontSize="medium" />,
   },
   {
     name: 'cart',

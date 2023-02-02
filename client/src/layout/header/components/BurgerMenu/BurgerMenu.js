@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, MenuItem, Menu, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { setIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
@@ -123,7 +124,7 @@ const BurgerMenu = () => {
         onClick={handleOpenNavMenu}
         sx={{ padding: 0, color: 'text.primary' }}
       >
-        <MenuIcon />
+        {anchorElNav ? <CloseIcon /> : <MenuIcon />}
       </IconButton>
 
       <Menu

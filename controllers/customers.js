@@ -1,270 +1,305 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const _ = require("lodash");
-const keys = require("../config/keys");
-const getConfigs = require("../config/getConfigs");
-const passport = require("passport");
-const uniqueRandom = require("unique-random");
+const BaseController = require('./baseController');
+const Customer = require('../models/Customer');
+const AuthUtils = require('../utils/authUtils');
+const ValidationUtils = require('../utils/validationUtils');
+const uniqueRandom = require('unique-random');
 const rand = uniqueRandom(10000000, 99999999);
+const {
+  ValidationError,
+  NotFoundError,
+  DuplicateError,
+  AuthenticationError,
+} = require('../utils/errors');
 
-// Load Customer model
-const Customer = require("../models/Customer");
-
-// Load validation helper to validate all received fields
-const validateRegistrationForm = require("../validation/validationHelper");
-
-// Load helper for creating correct query to save customer to DB
-const queryCreator = require("../commonHelpers/queryCreator");
-
-// Controller for creating customer and saving to DB
-exports.createCustomer = (req, res, next) => {
-  // Clone query object, because validator module mutates req.body, adding other fields to object
-  const initialQuery = _.cloneDeep(req.body);
-  initialQuery.customerNo = rand();
-
-  // Check Validation
-  const { errors, isValid } = validateRegistrationForm(req.body);
-
-  if (!isValid) {
-    return res.status(400).json(errors);
+class CustomerController extends BaseController {
+  constructor() {
+    super(Customer);
   }
 
-  Customer.findOne({
-    $or: [{ email: req.body.email }, { login: req.body.login }]
-  })
-    .then(customer => {
-      if (customer) {
-        if (customer.email === req.body.email) {
-          return res
-            .status(400)
-            .json({ message: `Email ${customer.email} already exists"` });
-        }
+  // Реалізація методу create
+  async create(req, res, next) {
+    try {
+      // Валідація обов'язкових полів
+      const requiredFields = [
+        'email',
+        'password',
+        'firstName',
+        'lastName',
+        'login',
+      ];
+      const validationResult = ValidationUtils.validateRequiredFields(
+        req.body,
+        requiredFields,
+      );
 
-        if (customer.login === req.body.login) {
-          return res
-            .status(400)
-            .json({ message: `Login ${customer.login} already exists` });
-        }
+      if (!validationResult.isValid) {
+        throw new ValidationError(validationResult.errors);
       }
 
-      // Create query object for qustomer for saving him to DB
-      const newCustomer = new Customer(queryCreator(initialQuery));
+      // Валідація email
+      if (!ValidationUtils.validateEmail(req.body.email)) {
+        throw new ValidationError({ email: 'Invalid email format' });
+      }
 
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newCustomer.password, salt, (err, hash) => {
-          if (err) {
-            res
-              .status(400)
-              .json({ message: `Error happened on server: ${err}` });
+      // Валідація пароля
+      const passwordValidation = ValidationUtils.validatePassword(
+        req.body.password,
+      );
+      if (!passwordValidation.isValid) {
+        throw new ValidationError(passwordValidation.errors);
+      }
 
-            return;
-          }
-
-          newCustomer.password = hash;
-          newCustomer
-            .save()
-            .then(customer => res.json(customer))
-            .catch(err =>
-              res.status(400).json({
-                message: `Error happened on server: "${err}" `
-              })
-            );
+      // Валідація login
+      if (req.body.login.length < 3 || req.body.login.length > 10) {
+        throw new ValidationError({
+          login: 'Login must be between 3 and 10 characters',
         });
-      });
-    })
-    .catch(err =>
-      res.status(400).json({
-        message: `Error happened on server: "${err}" `
-      })
-    );
-};
-
-// Controller for customer login
-exports.loginCustomer = async (req, res, next) => {
-  const { errors, isValid } = validateRegistrationForm(req.body);
-
-  // Check Validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
-  const loginOrEmail = req.body.loginOrEmail;
-  const password = req.body.password;
-  const configs = await getConfigs();
-
-  // Find customer by email
-  Customer.findOne({
-    $or: [{ email: loginOrEmail }, { login: loginOrEmail }]
-  })
-    .then(customer => {
-      // Check for customer
-      if (!customer) {
-        errors.loginOrEmail = "Customer not found";
-        return res.status(404).json(errors);
       }
 
-      // Check Password
-      bcrypt.compare(password, customer.password).then(isMatch => {
-        if (isMatch) {
-          // Customer Matched
-          const payload = {
-            id: customer.id,
-            firstName: customer.firstName,
-            lastName: customer.lastName,
-            isAdmin: customer.isAdmin
-          }; // Create JWT Payload
+      // Перевірка на існуючого користувача
+      const existingCustomer = await this.model.findOne({
+        $or: [{ email: req.body.email }, { login: req.body.login }],
+      });
 
-          // Sign Token
-          jwt.sign(
-            payload,
-            keys.secretOrKey,
-            { expiresIn: 36000 },
-            (err, token) => {
-              res.json({
-                success: true,
-                token: "Bearer " + token
-              });
-            }
+      if (existingCustomer) {
+        if (existingCustomer.email === req.body.email) {
+          throw new DuplicateError(
+            `Email ${req.body.email} already exists`,
+            'email',
           );
-        } else {
-          errors.password = "Password incorrect";
-          return res.status(400).json(errors);
         }
+        if (existingCustomer.login === req.body.login) {
+          throw new DuplicateError(
+            `Login ${req.body.login} already exists`,
+            'login',
+          );
+        }
+      }
+
+      // Хешування пароля
+      const hashedPassword = await AuthUtils.hashPassword(req.body.password);
+
+      // Створення нового користувача
+      const customerData = {
+        ...req.body,
+        password: hashedPassword,
+        customerNo: rand(),
+      };
+
+      const customer = new this.model(customerData);
+      const savedCustomer = await customer.save();
+      delete savedCustomer.password;
+
+      // Створення токена
+      const payload = AuthUtils.createTokenPayload(savedCustomer);
+      const token = AuthUtils.generateToken(payload);
+
+      return res.status(201).json({
+        customer: savedCustomer,
+        token: `Bearer ${token}`,
       });
-    })
-    .catch(err =>
-      res.status(400).json({
-        message: `Error happened on server: "${err}" `
-      })
-    );
-};
-
-// Controller for getting current customer
-exports.getCustomer = (req, res) => {
-  res.json(req.user);
-};
-
-// Controller for editing customer personal info
-exports.editCustomerInfo = (req, res) => {
-  // Clone query object, because validator module mutates req.body, adding other fields to object
-  const initialQuery = _.cloneDeep(req.body);
-
-  // Check Validation
-  const { errors, isValid } = validateRegistrationForm(req.body);
-
-  if (!isValid) {
-    return res.status(400).json(errors);
+    } catch (error) {
+      next(error);
+    }
   }
 
-  Customer.findOne({ _id: req.user.id })
-    .then(customer => {
+  // Реалізація методу getAll
+  async getAll(req, res, next) {
+    try {
+      const customers = await this.model
+        .find()
+        .select('-password')
+        .sort({ firstName: 1, lastName: 1 });
+      return res.json(customers);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // Реалізація методу getOne
+  async getOne(req, res, next) {
+    try {
+      const customer = await this.model
+        .findById(req.params.id)
+        .select('-password');
       if (!customer) {
-        errors.id = "Customer not found";
-        return res.status(404).json(errors);
+        throw new NotFoundError('Customer not found');
       }
-
-      const currentEmail = customer.email;
-      const currentLogin = customer.login;
-      let newEmail;
-      let newLogin;
-
-      if (req.body.email) {
-        newEmail = req.body.email;
-
-        if (currentEmail !== newEmail) {
-          Customer.findOne({ email: newEmail }).then(customer => {
-            if (customer) {
-              errors.email = `Email ${newEmail} is already exists`;
-              res.status(400).json(errors);
-              return;
-            }
-          });
-        }
-      }
-
-      if (req.body.login) {
-        newLogin = req.body.login;
-
-        if (currentLogin !== newLogin) {
-          Customer.findOne({ login: newLogin }).then(customer => {
-            if (customer) {
-              errors.login = `Login ${newLogin} is already exists`;
-              res.status(400).json(errors);
-              return;
-            }
-          });
-        }
-      }
-
-      // Create query object for qustomer for saving him to DB
-      const updatedCustomer = queryCreator(initialQuery);
-
-      Customer.findOneAndUpdate(
-        { _id: req.user.id },
-        { $set: updatedCustomer },
-        { new: true }
-      )
-        .then(customer => res.json(customer))
-        .catch(err =>
-          res.status(400).json({
-            message: `Error happened on server: "${err}" `
-          })
-        );
-    })
-    .catch(err =>
-      res.status(400).json({
-        message: `Error happened on server:"${err}" `
-      })
-    );
-};
-
-// Controller for editing customer password
-exports.updatePassword = (req, res) => {
-  // Check Validation
-  const { errors, isValid } = validateRegistrationForm(req.body);
-
-  if (!isValid) {
-    return res.status(400).json(errors);
+      return res.json(customer);
+    } catch (error) {
+      next(error);
+    }
   }
 
-  // find our user by ID
-  Customer.findOne({ _id: req.user.id }, (err, customer) => {
-    let oldPassword = req.body.password;
-
-    customer.comparePassword(oldPassword, function(err, isMatch) {
-      if (!isMatch) {
-        errors.password = "Password does not match";
-        res.json(errors);
-      } else {
-        let newPassword = req.body.newPassword;
-
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newPassword, salt, (err, hash) => {
-            if (err) throw err;
-            newPassword = hash;
-            Customer.findOneAndUpdate(
-              { _id: req.user.id },
-              {
-                $set: {
-                  password: newPassword
-                }
-              },
-              { new: true }
-            )
-              .then(customer => {
-                res.json({
-                  message: "Password successfully changed",
-                  customer: customer
-                });
-              })
-              .catch(err =>
-                res.status(400).json({
-                  message: `Error happened on server: "${err}" `
-                })
-              );
-          });
-        });
+  // Реалізація методу update
+  async update(req, res, next) {
+    try {
+      const customer = await this.model.findById(req.params.id);
+      if (!customer) {
+        throw new NotFoundError('Customer not found');
       }
-    });
-  });
-};
+
+      // Валідація email якщо він змінюється
+      if (req.body.email && req.body.email !== customer.email) {
+        if (!ValidationUtils.validateEmail(req.body.email)) {
+          throw new ValidationError({ email: 'Invalid email format' });
+        }
+
+        const existingCustomer = await this.model.findOne({
+          email: req.body.email,
+        });
+        if (existingCustomer) {
+          throw new DuplicateError(
+            `Email ${req.body.email} already exists`,
+            'email',
+          );
+        }
+      }
+
+      // Валідація login якщо він змінюється
+      if (req.body.login && req.body.login !== customer.login) {
+        const existingCustomer = await this.model.findOne({
+          login: req.body.login,
+        });
+        if (existingCustomer) {
+          throw new DuplicateError(
+            `Login ${req.body.login} already exists`,
+            'login',
+          );
+        }
+      }
+
+      // Оновлення даних
+      const updatedCustomer = await this.model
+        .findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
+        .select('-password');
+
+      return res.json(updatedCustomer);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // Реалізація методу delete
+  async delete(req, res, next) {
+    try {
+      const customer = await this.model.findById(req.params.id);
+      if (!customer) {
+        throw new NotFoundError('Customer not found');
+      }
+
+      await this.model.findByIdAndDelete(req.params.id);
+      return res.json({
+        message: `Customer "${customer.firstName} ${customer.lastName}" successfully deleted`,
+        deletedCustomer: {
+          id: customer.id,
+          firstName: customer.firstName,
+          lastName: customer.lastName,
+          email: customer.email,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // Додатковий метод для логіну
+  async login(req, res, next) {
+    try {
+      const { email, password } = req.body;
+
+      // Валідація обов'язкових полів
+      const validationResult = ValidationUtils.validateRequiredFields(
+        req.body,
+        ['email', 'password'],
+      );
+      if (!validationResult.isValid) {
+        throw new ValidationError(validationResult.errors);
+      }
+
+      // Пошук користувача
+      const customer = await this.model.findOne({ email });
+      if (!customer) {
+        throw new NotFoundError('Customer not found');
+      }
+
+      // Перевірка пароля
+      const isMatch = await AuthUtils.comparePassword(
+        password,
+        customer.password,
+      );
+      if (!isMatch) {
+        throw new AuthenticationError('Invalid password');
+      }
+
+      // Створення токена
+      const payload = AuthUtils.createTokenPayload(customer);
+      const token = AuthUtils.generateToken(payload);
+
+      return res.json({
+        success: true,
+        token: `Bearer ${token}`,
+        customer: {
+          id: customer.id,
+          email: customer.email,
+          firstName: customer.firstName,
+          lastName: customer.lastName,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // Додатковий метод для оновлення пароля
+  async updatePassword(req, res, next) {
+    try {
+      const { currentPassword, newPassword } = req.body;
+      const customer = await this.model.findById(req.user.id);
+
+      if (!customer) {
+        throw new NotFoundError('Customer not found');
+      }
+
+      // Перевірка поточного пароля
+      const isMatch = await AuthUtils.comparePassword(
+        currentPassword,
+        customer.password,
+      );
+      if (!isMatch) {
+        throw new AuthenticationError('Current password is incorrect');
+      }
+
+      // Валідація нового пароля
+      const passwordValidation = ValidationUtils.validatePassword(newPassword);
+      if (!passwordValidation.isValid) {
+        throw new ValidationError(passwordValidation.errors);
+      }
+
+      // Хешування нового пароля
+      const hashedPassword = await AuthUtils.hashPassword(newPassword);
+
+      // Оновлення пароля
+      customer.password = hashedPassword;
+      await customer.save();
+
+      return res.json({ message: 'Password updated successfully' });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // Додатковий метод для отримання поточного користувача
+  getCurrentCustomer(req, res, next) {
+    try {
+      if (!req.user) {
+        throw new AuthenticationError('User not authenticated');
+      }
+      return res.json(req.user);
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+module.exports = new CustomerController();

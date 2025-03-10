@@ -24,7 +24,7 @@ const comments = require('./routes/comments');
 const shippingMethods = require('./routes/shippingMethods');
 const paymentMethods = require('./routes/paymentMethods');
 const partners = require('./routes/partners');
-const { nextTick } = require('process');
+const errorHandler = require('./middleware/errorHandler');
 // const mainRoute = require("./routes/index");
 
 const app = express();
@@ -95,6 +95,9 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+
+// Global error handler
+app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
 

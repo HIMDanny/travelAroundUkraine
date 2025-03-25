@@ -157,7 +157,10 @@ class CustomerController extends BaseController {
       // Валідація нового пароля
       const passwordValidation = ValidationUtils.validatePassword(newPassword);
       if (!passwordValidation.isValid) {
-        throw new ValidationError(passwordValidation.errors);
+        throw new ValidationError(
+          'Invalid password',
+          passwordValidation.errors,
+        );
       }
 
       await this.customerService.updatePassword(

@@ -32,7 +32,7 @@ class CustomerRepositoryImpl extends CustomerRepository {
   }
 
   async findById(id) {
-    return await Customer.findById(id).select('-password');
+    return await Customer.findById(id);
   }
 
   async update(id, customerData) {

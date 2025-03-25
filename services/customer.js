@@ -20,12 +20,14 @@ class CustomerService {
 
   async getCustomerById(id) {
     const customer = await this.customerRepository.findById(id);
+    const customerWithoutPassword = customer.toObject();
+    delete customerWithoutPassword.password;
 
     if (!customer) {
       throw new NotFoundError('Customer not found');
     }
 
-    return customer;
+    return customerWithoutPassword;
   }
 
   async createCustomer(customerData) {

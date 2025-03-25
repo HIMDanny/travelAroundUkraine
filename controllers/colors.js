@@ -5,7 +5,7 @@ const {
   ValidationError,
   NotFoundError,
   DuplicateError,
-} = require('../utils/errors');
+} = require('../core/error-handling/errors');
 
 class ColorController extends BaseController {
   constructor() {
@@ -23,13 +23,18 @@ class ColorController extends BaseController {
       );
 
       if (!validationResult.isValid) {
-        throw new ValidationError(validationResult.errors);
+        throw new ValidationError(
+          'Required fields are missing',
+          validationResult.errors,
+        );
       }
 
       // Валідація hex коду
       const hexCodeRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
       if (!hexCodeRegex.test(req.body.hexCode)) {
-        throw new ValidationError({ hexCode: 'Invalid hex color code' });
+        throw new ValidationError('Invalid hex color code', {
+          hexCode: 'Invalid hex color code',
+        });
       }
 
       // Перевірка на існуючий колір
@@ -37,7 +42,6 @@ class ColorController extends BaseController {
       if (existingColor) {
         throw new DuplicateError(
           `Color with name "${req.body.name}" already exists`,
-          'name',
         );
       }
 
@@ -78,7 +82,9 @@ class ColorController extends BaseController {
       if (req.body.hexCode) {
         const hexCodeRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
         if (!hexCodeRegex.test(req.body.hexCode)) {
-          throw new ValidationError({ hexCode: 'Invalid hex color code' });
+          throw new ValidationError('Invalid hex color code', {
+            hexCode: 'Invalid hex color code',
+          });
         }
       }
 
@@ -90,7 +96,6 @@ class ColorController extends BaseController {
         if (existingColor) {
           throw new DuplicateError(
             `Color with name "${req.body.name}" already exists`,
-            'name',
           );
         }
       }

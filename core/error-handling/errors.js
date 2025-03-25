@@ -1,5 +1,5 @@
 class AppError extends Error {
-  constructor(message, statusCode) {
+  constructor(message, statusCode = 500) {
     super(message);
     this.statusCode = statusCode;
     this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
@@ -10,10 +10,7 @@ class AppError extends Error {
 }
 
 class ValidationError extends AppError {
-  constructor(errors) {
-    const message =
-      typeof errors === 'string' ? errors : JSON.stringify(errors);
-
+  constructor(message, errors) {
     super(message, 400);
     this.name = 'ValidationError';
     this.errors = errors;
@@ -28,10 +25,9 @@ class NotFoundError extends AppError {
 }
 
 class DuplicateError extends AppError {
-  constructor(message, field) {
+  constructor(message) {
     super(message, 400);
     this.name = 'DuplicateError';
-    this.field = field;
   }
 }
 

@@ -6,6 +6,8 @@ const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
 
+const errorHandler = require('./core/error-handling/errorHandler');
+
 const globalConfigs = require('./routes/globalConfigs');
 const customers = require('./routes/customers');
 const catalog = require('./routes/catalog');
@@ -24,7 +26,6 @@ const comments = require('./routes/comments');
 const shippingMethods = require('./routes/shippingMethods');
 const paymentMethods = require('./routes/paymentMethods');
 const partners = require('./routes/partners');
-const errorHandler = require('./middleware/errorHandler');
 // const mainRoute = require("./routes/index");
 
 const app = express();
@@ -33,12 +34,11 @@ app.use(cors());
 
 // Body parser middleware
 
-app.use((reg, res, next) => {
+app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Methods',
-
-    'OPTIONS, GET, POST, PUT, PATCH, DELETE', // what matters here is that OPTIONs is present
+    'OPTIONS, GET, POST, PUT, PATCH, DELETE',
   );
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
@@ -96,7 +96,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Global error handler
+// Error handling middleware
 app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
